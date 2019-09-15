@@ -1,0 +1,40 @@
+<% include ../partials/_header %>
+    <% include ../partials/_navigation %>
+        <% include ../partials/_message %>
+            <table align="center">
+                <h3 style="color:white" align="center">Bienvenido
+                    <%= user.nombre_usuario %>!
+                </h3>
+                <tr>
+                    <td>
+                        <div class="imgContainer">
+                            <div>
+                                <img src="../images/pngocean.com-id-wdafi.png" alt="">
+                            </div>
+                            <div class="imgButton">
+                                <a class="btn btn-outline-light mt-auto" href="">Consultar por cancha</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="imgContainer">
+                            <div>
+                                <img src="../images/enigroom-icono-reserva.png" alt="">
+                            </div>
+                            <div class="imgButton">
+                                <a class="btn btn-outline-light mt-auto" href="">Ver Reserva</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- <div class="container">
+            <img src="../images/pngocean.com-id-wdafi.png" alt="">
+            <a class="btn btn-secondary mt-auto" href="">Consultar por cancha</a>
+        </div>
+        <div class="container">
+            <img src="../images/enigroom-icono-reserva.png" alt="">
+            <a class="btn btn-secondary mt-auto" href="">Ver Reserva</a>
+        </div> -->
+            <% include ../partials/_footer %>
