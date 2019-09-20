@@ -727,3 +727,32 @@ body.all {
 .chiller-theme .sidebar-footer>a:last-child {
     border-right: none;
 }
+
+.card-body-icon {
+    position: absolute;
+    z-index: 0;
+    top: -1rem;
+    right: -1rem;
+    opacity: 0.4;
+    font-size: 5rem;
+    -webkit-transform: rotate(15deg);
+    transform: rotate(15deg);
+}
+
+.adminForm {
+    margin-top: 120px;
+}
+
+.FieldsForm {
+    margin-top: 120px;
+    margin-left: 250px;
+}
+
+.Ptest {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.SelectTest {
+    display: inline-block;
+}

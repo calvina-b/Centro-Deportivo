@@ -21,7 +21,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 //Mddlewares
 app.use(session({
-    secret: 'Testsession',
+    key: 'session_cookie_name',
+    secret: 'session_cookie_secret',
     resave: false,
     saveUninitialized: false,
     store: new MySQLStore(database)

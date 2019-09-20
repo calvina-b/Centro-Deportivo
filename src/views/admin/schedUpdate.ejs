@@ -1,0 +1,24 @@
+<% include ../partials/_header %>
+    <% include ../partials/_message %>
+        <% include ../partials/_admin %>
+            <div class="AdminForm">
+                <h5>Editar horario</h5>
+                <form action="/admin/sched/update/<%= scheds.id_horario  %>" method="POST">
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="text" value="<%= scheds.hora_inicio  %>" name="hora_inicio" id="inputHora_inicio" class="form-control" placeholder="Hora inicio" required autofocus>
+                                <label for="inputHora_inicio">Hora Inicio</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="text" value="<%= scheds.hora_termino  %>" name="hora_termino" id="inputHora_termino" class="form-control" placeholder="Hora termino" required autofocus>
+                                <label for="inputHora_termino">Hora termino</label>
+                            </div>
+                            <button class="btnRegister">Editar horario</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <% include ../partials/_footer %>

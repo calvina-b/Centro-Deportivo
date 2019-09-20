@@ -1,0 +1,35 @@
+<% include ../partials/_header %>
+    <% include ../partials/_message %>
+        <% include ../partials/_admin %>
+            <div class="adminForm">
+                <h5>Editar arbitro</h5>
+                <form action="/admin/referees/update/<%= referees.id_arbitro  %>" method="POST">
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="text" value="<%= referees.nombre  %>" name="nombre" id="inputNombre" class="form-control" placeholder="Nombre_completo" required autofocus>
+                                <label for="inputNombre">Nombre Completo</label>
+                            </div>
+                            <div class="form-group input-group">
+                                <input type="number" value="<%= referees.rut  %>" name="rut" minlength="8" maxlength="8" class="form-control" placeholder="Rut" required/>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="email" value="<%= referees.correo  %>" name="correo" id="inputCorreo" class="form-control" placeholder="Correo" required>
+                                <label for="inputCorreo">Correo</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group input-group">
+                                <input type="text" class="form-control" value="+569" style="max-width: 65px;" readonly>
+                                <input type="number" value="<%= referees.nro_contacto  %>" name="nro_contacto" class="form-control" placeholder="Telefono" minlength="8" maxlength="8" required>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="text" value="<%= referees.deporte  %>" name="deporte" id="inputDeporte" class="form-control" placeholder="Deporte" required>
+                                <label for="inputDeporte">Deporte</label>
+                            </div>
+                            <button class="btnRegister">Editar arbitro</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <% include ../partials/_footer %>

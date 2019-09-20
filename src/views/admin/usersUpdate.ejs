@@ -1,0 +1,46 @@
+<% include ../partials/_header %>
+    <% include ../partials/_message %>
+        <% include ../partials/_admin %>
+            <div class="adminForm">
+                <h5>Editar usuario</h5>
+                <form action="/admin/users/update/<%= users.id_usuario  %>" method="POST">
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="text" value="<%= users.nombre  %>" name="nombre" id="inputNombre" class="form-control" placeholder="Nombre_completo" required autofocus>
+                                <label for="inputNombre">Nombre Completo</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="text" value="<%= users.nombre_usuario  %>" name="nombre_usuario" id="inputNombre_usuario" class="form-control" placeholder="Nombre Usuario" required>
+                                <label for="inputNombre_usuario">Nombre Usuario</label>
+                            </div>
+                            <div class="form-group input-group">
+                                <input type="text" class="form-control" value="+569" style="max-width: 65px;" readonly>
+                                <input type="number" value="<%= users.telefono  %>" name="telefono" class="form-control" placeholder="Telefono" minlength="8" maxlength="8" required>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="email" value="<%= users.correo  %>" name="correo" id="inputCorreo" class="form-control" placeholder="Correo" required>
+                                <label for="inputCorreo">Correo</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group input-group">
+                                <input type="number" value="<%= users.rut  %>" name="rut" minlength="9" maxlength="9" class="form-control" placeholder="Rut" required/>
+                                <input type="text" value="<%= users.dV  %>" name="dV" minlength="1" maxlength="1" class="form-control" style="max-width: 65px;" placeholder="DV" required/>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="text" value="<%= users.direccion  %>" name="direccion" id="inputDireccion" class="form-control" placeholder="Direccion" required>
+                                <label for="inputDireccion">Direccion</label>
+                            </div>
+                            <p class="Ptest ">Tipo de cuenta:</p>
+                            <select class="SelectTest" name="tipo_cuenta">
+                                <option value="Cliente">Cliente</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                            <button class="btnRegister">Editar usuario</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <% include ../partials/_footer %>

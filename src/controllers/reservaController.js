@@ -1,8 +1,8 @@
 const controller = {};
 
-controller.list = async(req, res) => {
+controller.newReserv = async(req, res) => {
     // const reserva = await db.query('SELECT * FROM reserva');
-    res.render('prueba');
+    res.render('reserva/reserva');
 };
 
 module.exports = controller;

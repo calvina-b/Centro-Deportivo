@@ -2,7 +2,7 @@ const passport = require('passport');
 
 const controller = {};
 
-controller.getLogin = (req, res) => {
+controller.getLogin = async(req, res) => {
     res.render('user/login');
 };
 

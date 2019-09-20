@@ -1,0 +1,77 @@
+<% include ../partials/_header %>
+    <% include ../partials/_message %>
+        <% include ../partials/_admin %>
+            <div>
+                <div class="card-header bg-dark text-white" style="height: 10%">
+                    <i class="fas fa-basketball-ball"></i> Articulos
+                    <a href="/admin/items/add" class="btn btn-success" style="float: right;">Añadir nuevo</a></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>ID cancha</th>
+                                    <th>Deporte cancha</th>
+                                    <th>Valor arriedo</th>
+                                    <th>Precio costo</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>ID cancha</th>
+                                    <th>Deporte cancha</th>
+                                    <th>Valor arriedo</th>
+                                    <th>Precio costo</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <% if(items){ %>
+                                    <% for (var i=0; i < items.length; i++){ %>
+                                        <tr>
+                                            <td>
+                                                <%= items[i].cod  %>
+                                            </td>
+                                            <td>
+                                                <%= items[i].nombre_art  %>
+                                            </td>
+                                            <td>
+                                                <%= items[i].id_cancha  %>
+                                            </td>
+                                            <td>
+                                                <%= items[i].deporte_cancha  %>
+                                            </td>
+                                            <td>
+                                                $
+                                                <%= items[i].valor  %>
+                                            </td>
+                                            <td>
+                                                $
+                                                <%= items[i].precio_costo  %>
+                                            </td>
+                                            <td>
+                                                <%= items[i].estado  %>
+                                            </td>
+                                            <td align="Center">
+                                                <a href="/admin/items/update/<%= items[i].cod  %>" style="color: blue"><i class="fas fa-pencil-alt"></i></a>
+                                                <a href="/admin/items/delete/<%= items[i].cod  %>" style="color: red"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                        <%} %>
+                                            <%} %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </main>
+            <!-- page-content" -->
+            </div>
+            <% include ../partials/_footer %>

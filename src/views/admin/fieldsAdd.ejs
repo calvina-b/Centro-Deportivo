@@ -1,0 +1,27 @@
+<% include ../partials/_header %>
+    <% include ../partials/_message %>
+        <% include ../partials/_admin %>
+            <div class="FieldsForm">
+                <h5>Nueva cancha</h5>
+                <form action="/admin/fields/add" method="POST">
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="number" name="id" id="inputID" class="form-control" placeholder="ID" required autofocus>
+                                <label for="inputID">ID</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="text" name="deporte" id="inputDeporte" class="form-control" placeholder="Deporte" required>
+                                <label for="inputDeporte">Deporte</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="number" name="precio_base" id="inputPrecio_Base" class="form-control" placeholder="Precio base" required>
+                                <label for="inputPrecio_Base">Precio base</label>
+                            </div>
+                            <button class="btnRegister">Añadir cancha</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <% include ../partials/_footer %>

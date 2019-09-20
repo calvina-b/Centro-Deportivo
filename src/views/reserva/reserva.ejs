@@ -1,0 +1,17 @@
+<% include ../partials/_header %>
+    <% include ../partials/_navigation %>
+        <% include ../partials/_message %>
+            <div class="imgContainer">
+                <div>
+                    <img src="../images/pngocean.com-id-wdafi.png" alt="">
+                </div>
+            </div>
+            <div id="div"></div>
+            <script>
+                $(function() {
+                    $('#div').datepicker({
+                        language: "es"
+                    });
+                });
+            </script>
+            <% include ../partials/_footer %>

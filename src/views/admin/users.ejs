@@ -1,0 +1,75 @@
+<% include ../partials/_header %>
+    <% include ../partials/_message %>
+        <% include ../partials/_admin %>
+            <div>
+                <div class="card-header bg-dark text-white">
+                    <i class="fas fa-users"></i> Usuarios registrados</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Nombre Usuario</th>
+                                    <th>Rut</th>
+                                    <th>Correo</th>
+                                    <th>Telefono</th>
+                                    <th>Direccion</th>
+                                    <th>Tipo Cuenta</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Nombre Usuario</th>
+                                    <th>Rut</th>
+                                    <th>Correo</th>
+                                    <th>Telefono</th>
+                                    <th>Direccion</th>
+                                    <th>Tipo Cuenta</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <% if(users){ %>
+                                    <% for (var i=0; i < users.length; i++){ %>
+                                        <tr>
+                                            <td>
+                                                <%= users[i].nombre  %>
+                                            </td>
+                                            <td>
+                                                <%= users[i].nombre_usuario  %>
+                                            </td>
+                                            <td>
+                                                <%= users[i].rut  %>-
+                                                    <%= users[i].dV  %>
+                                            </td>
+                                            <td>
+                                                <%= users[i].correo  %>
+                                            </td>
+                                            <td>
+                                                <%= users[i].telefono  %>
+                                            </td>
+                                            <td>
+                                                <%= users[i].direccion  %>
+                                            </td>
+                                            <td>
+                                                <%= users[i].tipo_cuenta  %>
+                                            </td>
+                                            <td align="Center">
+                                                <a href="/admin/users/update/<%= users[i].id_usuario  %>" style="color: blue"><i class="fas fa-pencil-alt"></i></a>
+                                                <a href="/admin/users/delete/<%= users[i].id_usuario  %>" style="color: red"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                        <%} %>
+                                            <%} %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </main>
+            <!-- page-content" -->
+            </div>
+            <% include ../partials/_footer %>

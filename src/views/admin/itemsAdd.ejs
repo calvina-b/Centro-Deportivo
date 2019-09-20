@@ -1,0 +1,45 @@
+<% include ../partials/_header %>
+    <% include ../partials/_message %>
+        <% include ../partials/_admin %>
+            <div class="adminForm">
+                <h5>Nuevo articulo</h5>
+                <form action="/admin/items/add" method="POST">
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="number" name="cod" id="inputCod" class="form-control" placeholder="Codigo" required autofocus>
+                                <label for="inputCod">Codigo</label>
+                            </div>
+                            <div class="form-label-group ">
+                                <input type="text " name="nombre_art" id="inputNombre_art" class="form-control " placeholder="Nombre" required>
+                                <label for="inputNombre_art">Nombre</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="number" id="inputID_cancha" name="id_cancha" class="form-control" placeholder="ID Cancha" required>
+                                <label for="inputID_cancha">ID cancha</label>
+                            </div>
+                            <div class="form-label-group ">
+                                <input type="text " name="deporte_cancha" id="inputDeporte_cancha " class="form-control " placeholder="Deporte cancha " required>
+                                <label for="inputDeporte_cancha ">Deporte cancha</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <div class="form-label-group ">
+                                <input type="number " name="valor" id="inputValor" class="form-control " placeholder="Valor" required>
+                                <label for="inputValor">Valor arriendo</label>
+                            </div>
+                            <div class="form-label-group ">
+                                <input type="number" name="precio_costo" id="inputPrecio_costo " class="form-control " placeholder="Precio costo" " required>
+                                <label for="inputPrecio_costo ">Precio costo</label>
+                            </div>
+                            <p class="Ptest ">Estado del articulo:</p>
+                            <select class="SelectTest" name="estado">
+                                <option value="BUEN ESTADO ">Buen estado</option>
+                                <option value="MAL ESTADO ">Mal estado</option>
+                            </select>
+                            <button class="btnRegister ">Añadir articulo</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <% include ../partials/_footer %>

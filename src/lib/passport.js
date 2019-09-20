@@ -9,7 +9,7 @@ passport.use('local.register', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async(req, correo, password, done) => {
-    const { nombre, nombre_usuario, direccion, rut, dV, telefono, tipo_cuenta } = req.body;
+    const { nombre, nombre_usuario, direccion, rut, dV, telefono } = req.body;
     const newUser = {
         correo,
         password,

@@ -1,0 +1,55 @@
+<% include ../partials/_header %>
+    <% include ../partials/_message %>
+        <% include ../partials/_admin %>
+            <div>
+                <div class="card-header bg-dark text-white" style="height: 10%">
+                    <i class="fas fa-calendar-alt"></i> Horarios
+                    <a href ="/admin/sched/add" class="btn btn-success" style="float: right;">Añadir nuevo</a></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hora inicio</th>
+                                    <th>Hora termino</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hora inicio</th>
+                                    <th>Hora termino</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <% if(sched){ %>
+                                    <% for (var i=0; i < sched.length; i++){ %>
+                                        <tr>
+                                            <td>
+                                                <%= sched[i].id_horario  %>
+                                            </td>
+                                            <td>
+                                                <%= sched[i].hora_inicio  %>
+                                            </td>
+                                            <td>
+                                                <%= sched[i].hora_termino  %>
+                                            </td>
+                                            <td align="Center">
+                                                <a href="/admin/sched/update/<%= sched[i].id_horario  %>"" style="color: blue"><i class="fas fa-pencil-alt"></i></a>
+                                                <a href="/admin/sched/delete/<%= sched[i].id_horario  %>" style="color: red"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                        <%} %>
+                                            <%} %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </main>
+            <!-- page-content" -->
+            </div>
+            <% include ../partials/_footer %>
