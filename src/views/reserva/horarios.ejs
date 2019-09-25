@@ -14,6 +14,7 @@
                               <th>Deporte</th>
                               <th>Precio base</th>
                               <th>Fecha</th>
+                              <th>ID Horario</th>
                               <th>Hora inicio</th>
                               <th>Hora termino</th>
                               <th>Acciones</th>
@@ -25,6 +26,7 @@
                                 <th>Deporte</th>
                                 <th>Precio base</th>
                                 <th>Fecha</th>
+                                <th>ID Horario</th>
                                 <th>Hora inicio</th>
                                 <th>Hora termino</th>
                                 <th>Acciones</th>
@@ -37,7 +39,7 @@
                                 <td>
                                         <%= horario[i].id  %>
                                 </td>
-                                <td>
+                                <td name="deporte">
                                         <%= horario[i].deporte  %>
                                 </td>
                                 <td>
@@ -45,6 +47,9 @@
                                 </td>
                                 <td>
                                         <%= fecha  %>
+                                </td>
+                                <td>
+                                    <%= horario[i].id_horario  %>
                                 </td>
                                 <td>
                                         <%= horario[i].hora_inicio  %>
@@ -79,15 +84,15 @@
                       var textval = $(this).text(); // this will be the text of each <td>
                       all.push(textval);
                   });
-                  console.log(all);
+                  console.log(all)
 
-                //   $.ajax({
-                //   url: '/reserva/horarios',
-                //   type: 'POST',
-                //   contentType: 'application/json',
-                //   data: JSON.stringify({"all": all}),
-                //   success: function(response){ console.log( response ); }
-                // });
+                  $.ajax({
+                    url: '/reserva/horarios',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(all),
+                    success: function(response){ console.log( response ); }
+                  });
                 });  
             </script>
             <% include ../partials/_footer %>
