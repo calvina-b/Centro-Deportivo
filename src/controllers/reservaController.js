@@ -19,12 +19,12 @@ controller.getHorario = async (req, res) => {
 };
 
 controller.postHorario = async (req, res) => {
-    const rut = req.user.rut;
-    const id = req.body[0];
-    const deporte = req.body[1];
-    const precio = req.body[2];
-    const fecha = req.body[3];
-    const horario = req.body[4];
+    // const rut = req.user.rut;
+    // const id = req.body[0];
+    // const deporte = req.body[1];
+    // const precio = req.body[2];
+    // const fecha = req.body[3];
+    // const horario = req.body[4];
     // await db.query('INSERT INTO reserva (fecha, valor_arriendo, rut_cliente, id_cancha, deporte_cancha, id_horario) VALUES ?', [fecha, precio, rut, id, deporte, horario]);
     console.log(req.body)
 };
