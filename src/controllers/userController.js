@@ -3,7 +3,7 @@ const passport = require('passport');
 const controller = {};
 
 controller.getLogin = async(req, res) => {
-    res.render('user/login');
+    res.render('user/login', {title: "Login" });
 };
 
 controller.postLogin = (req, res, next) => {
@@ -15,7 +15,7 @@ controller.postLogin = (req, res, next) => {
 };
 
 controller.getRegister = (req, res) => {
-    res.render('user/register');
+    res.render('user/register', {title: "Registro" });
 };
 
 controller.postRegister = passport.authenticate('local.register', {
@@ -25,7 +25,7 @@ controller.postRegister = passport.authenticate('local.register', {
 });
 
 controller.main = (req, res) => {
-    res.render('user/main');
+    res.render('user/main', {title: "Inicio" });
 };
 
 controller.logout = (req, res) => {

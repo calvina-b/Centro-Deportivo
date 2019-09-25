@@ -24,7 +24,7 @@ app.use(session({
     key: 'session_cookie_name',
     secret: 'session_cookie_secret',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: new MySQLStore(database)
 }));
 app.use(flash());

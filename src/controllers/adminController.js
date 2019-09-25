@@ -8,13 +8,13 @@ controller.getAdmin = async(req, res) => {
     const fieldsCount = await db.query('SELECT * FROM cancha');
     const itemsCount = await db.query('SELECT * FROM cancha');
     const schedCount = await db.query('SELECT * FROM cancha');
-    res.render('admin/admin', { usersCount, reservCount, refereeCount, fieldsCount, itemsCount, schedCount });
+    res.render('admin/admin', { title: "Administracion", usersCount, reservCount, refereeCount, fieldsCount, itemsCount, schedCount });
 };
 
 // ··········USUARIOS··········
 controller.getUsers = async(req, res) => {
     const users = await db.query('SELECT * FROM usuario');
-    res.render('admin/users', { users });
+    res.render('admin/users', { title: "Usuarios", users });
 };
 
 controller.deleteUsers = async(req, res) => {
@@ -27,7 +27,7 @@ controller.deleteUsers = async(req, res) => {
 controller.getUpdateUsers = async(req, res) => {
     const { id } = req.params;
     const users = await db.query('SELECT * FROM usuario WHERE id_usuario = ?', [id]);
-    res.render('admin/usersUpdate', { users: users[0] });
+    res.render('admin/usersUpdate', { title: "Editar usuario", users: users[0] });
 };
 
 controller.postUpdateUsers = async(req, res) => {
@@ -40,7 +40,7 @@ controller.postUpdateUsers = async(req, res) => {
 // ··········CANCHAS··········
 controller.getFields = async(req, res) => {
     const fields = await db.query('SELECT * FROM cancha');
-    res.render('admin/fields', { fields });
+    res.render('admin/fields', { title: "Canchas", fields });
 };
 
 controller.deleteFields = async(req, res) => {
@@ -51,7 +51,7 @@ controller.deleteFields = async(req, res) => {
 };
 
 controller.getAddFields = async(req, res) => {
-    res.render('admin/fieldsAdd');
+    res.render('admin/fieldsAdd', { title: "Añadir cancha" });
 };
 
 controller.postAddFields = async(req, res) => {
@@ -63,7 +63,7 @@ controller.postAddFields = async(req, res) => {
 controller.getUpdateFields = async(req, res) => {
     const { id } = req.params;
     const fields = await db.query('SELECT * FROM cancha WHERE id = ?', [id]);
-    res.render('admin/fieldsUpdate', { fields: fields[0] });
+    res.render('admin/fieldsUpdate', { title: "Editar Cancha", fields: fields[0] });
 };
 
 controller.postUpdateFields = async(req, res) => {
@@ -76,7 +76,7 @@ controller.postUpdateFields = async(req, res) => {
 // ··········ARBITROS··········
 controller.getReferee = async(req, res) => {
     const referee = await db.query('SELECT * FROM referee');
-    res.render('admin/referee', { referee });
+    res.render('admin/referee', { title: "Arbitros", referee });
 };
 
 controller.deleteReferee = async(req, res) => {
@@ -87,7 +87,7 @@ controller.deleteReferee = async(req, res) => {
 };
 
 controller.getAddReferee = async(req, res) => {
-    res.render('admin/refereeAdd');
+    res.render('admin/refereeAdd', { title: "Añadir arbitros"});
 };
 
 controller.postAddReferee = async(req, res) => {
@@ -99,7 +99,7 @@ controller.postAddReferee = async(req, res) => {
 controller.getUpdateReferee = async(req, res) => {
     const { id } = req.params;
     const referees = await db.query('SELECT * FROM referee WHERE id_arbitro = ?', [id]);
-    res.render('admin/refereeUpdate', { referees: referees[0] });
+    res.render('admin/refereeUpdate', { title: "Editar arbitro", referees: referees[0] });
 };
 
 controller.postUpdateReferee = async(req, res) => {
@@ -112,7 +112,7 @@ controller.postUpdateReferee = async(req, res) => {
 // ··········ARTICULOS··········
 controller.getItems = async(req, res) => {
     const items = await db.query('SELECT * FROM articulo');
-    res.render('admin/items', { items });
+    res.render('admin/items', { title: "Articulos", items });
 };
 
 controller.deleteItems = async(req, res) => {
@@ -123,7 +123,7 @@ controller.deleteItems = async(req, res) => {
 };
 
 controller.getAddItems = async(req, res) => {
-    res.render('admin/itemsAdd');
+    res.render('admin/itemsAdd', { title:"Añadir articulo" });
 };
 
 controller.postAddItems = async(req, res) => {
@@ -135,7 +135,7 @@ controller.postAddItems = async(req, res) => {
 controller.getUpdateItems = async(req, res) => {
     const { id } = req.params;
     const items = await db.query('SELECT * FROM articulo WHERE cod = ?', [id]);
-    res.render('admin/itemsUpdate', { items: items[0] });
+    res.render('admin/itemsUpdate', { title:"Editar articulo", items: items[0] });
 };
 
 controller.postUpdateItems = async(req, res) => {
@@ -148,22 +148,22 @@ controller.postUpdateItems = async(req, res) => {
 // ··········HORARIOS··········
 controller.getSched = async(req, res) => {
     const sched = await db.query('SELECT * FROM horarios');
-    res.render('admin/sched', { sched });
+    res.render('admin/sched', { title:"Horarios", sched });
 };
 
 controller.deleteSched = async(req, res) => {
     const { id } = req.params;
-    await db.query('DELETE FROM horarios WHERE id_horario = ?'), [id];
+    await db.query('DELETE FROM horarios WHERE id_horario = ?', [id]);
     req.flash('success', 'Horario eliminado correctamente');
     res.redirect('/admin/sched');
 };
 
 controller.getAddSched = async(req, res) => {
-    res.render('admin/schedAdd');
+    res.render('admin/schedAdd', { title:"Añadir horario" });
 };
 
 controller.postAddSched = async(req, res) => {
-    await db.query('INSERT INTO horario SET ?', [req.body]);
+    await db.query('INSERT INTO horarios SET ?', [req.body]);
     req.flash('success', 'Horario agregado correctamente');
     res.redirect('/admin/sched');
 };
@@ -171,7 +171,7 @@ controller.postAddSched = async(req, res) => {
 controller.getUpdateSched = async(req, res) => {
     const { id } = req.params;
     const scheds = await db.query('SELECT * FROM horarios WHERE id_horario = ?', [id]);
-    res.render('admin/schedUpdate', { scheds: scheds[0] });
+    res.render('admin/schedUpdate', { title:"Editar horario", scheds: scheds[0] });
 };
 
 controller.postUpdateSched = async(req, res) => {

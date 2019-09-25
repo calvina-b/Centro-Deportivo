@@ -139,6 +139,7 @@ body.all {
 }
 
 .imgContainer {
+    margin-top: -30px;
     padding: 3rem;
 }
 
@@ -755,4 +756,40 @@ body.all {
 
 .SelectTest {
     display: inline-block;
+}
+
+#dateContainer {
+    min-height: 15em;
+}
+
+.flow-element {
+    display: inline-block;
+    position: relative;
+    margin-left: 700px;
+    margin-top: -300px;
+}
+
+.columns {
+    float: left;
+    margin-left: 400px;
+    margin-top: -220px;
+    width: 15%;
+    padding: 10px;
+}
+
+.rows:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.cards {
+  padding: 16px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.btnCons {
+    margin-left: 1000px;
+    margin-top: -180px;
 }
