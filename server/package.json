@@ -1,0 +1,39 @@
+{
+    "name": "Reserva_canchas",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "concurrently \"tsc -w\" \"nodemon dist/index.js\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^3.0.6",
+        "connect-flash": "^0.1.1",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "ejs": "^2.7.1",
+        "express": "^4.17.1",
+        "express-mysql-session": "^2.1.0",
+        "express-session": "^1.16.2",
+        "express-validator": "^6.2.0",
+        "jsonwebtoken": "^8.5.1",
+        "morgan": "^1.9.1",
+        "mysql": "^2.17.1",
+        "passport": "^0.4.0",
+        "passport-local": "^1.0.0",
+        "promise-mysql": "^3.3.1"
+    },
+    "devDependencies": {
+        "@types/bcrypt": "^3.0.0",
+        "@types/cors": "^2.8.6",
+        "@types/dotenv": "^6.1.1",
+        "@types/express": "^4.17.1",
+        "@types/jsonwebtoken": "^8.3.5",
+        "@types/morgan": "^1.7.37",
+        "concurrently": "^5.0.0",
+        "nodemon": "^1.19.2"
+    }
+}

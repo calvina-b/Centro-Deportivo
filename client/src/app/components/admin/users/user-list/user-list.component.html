@@ -1,0 +1,74 @@
+<app-admin></app-admin>
+<div class="page-wrapper chiller-theme toggled">
+    <main class="page-content">
+        <div>
+            <div class="card-header bg-dark text-white">
+                <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
+                    <flash-messages></flash-messages>
+                </div>
+                <i class="fas fa-users"></i> Usuarios registrados
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Nombre Usuario</th>
+                                <th>Rut</th>
+                                <th>Correo</th>
+                                <th>Telefono</th>
+                                <th>Direccion</th>
+                                <th>Tipo Cuenta</th>
+                                <th colspan="2" style="text-align:center;">Acciones</th>                                    
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Nombre Usuario</th>
+                                <th>Rut</th>
+                                <th>Correo</th>
+                                <th>Telefono</th>
+                                <th>Direccion</th>
+                                <th>Tipo Cuenta</th>
+                                <th colspan="2" style="text-align:center;">Acciones</th>
+                            </tr>
+                        </tfoot>
+                        <tbody *ngFor="let user of users">
+                            <tr>
+                                <td>
+                                    {{user.nombre}}
+                                </td>
+                                <td>
+                                    {{user.nombre_usuario}}
+                                </td>
+                                <td>
+                                    {{user.rut}}-{{user.dV}}
+                                </td>
+                                <td>
+                                    {{user.correo}}
+                                </td>
+                                <td>
+                                    {{user.telefono}}
+                                </td>
+                                <td>
+                                    {{user.direccion}}
+                                </td>
+                                <td>
+                                    {{user.tipo_cuenta}}
+                                </td>
+                                <td align="Center">
+                                    <button [routerLink]="['edit', user.id_usuario]" style="color: blue; border: white; background-color: transparent;"><i class="fas fa-pencil-alt"></i></button>
+                                </td>
+                                <td align="Center">
+                                    <button style="color: red; border: white; background-color: transparent;" (click)="deleteUser(user.id_usuario)"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>         
+    </main>    
+</div>

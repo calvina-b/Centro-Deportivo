@@ -1,0 +1,52 @@
+<app-admin></app-admin>
+<div class="page-wrapper chiller-theme toggled">
+    <main class="page-content">
+        <div class="text-center" style="width: 50%; position: absolute; margin-left: 4cm;" >
+            <flash-messages></flash-messages>
+        </div>
+        <div class="FieldsForm" *ngIf="router.url == '/admin/fields/add'">
+            <h5>Nueva cancha</h5>
+            <form>
+                <div class="row register-form">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            <input type="number" [(ngModel)]="field.id" name="id" id="inputID" class="form-control" placeholder="ID" required autofocus>
+                            <label for="inputID">ID</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" [(ngModel)]="field.deporte" name="deporte" id="inputDeporte" class="form-control" placeholder="Deporte" required>
+                            <label for="inputDeporte">Deporte</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="number" [(ngModel)]="field.precio_Base" name="precio_base" id="inputPrecio_Base" class="form-control" placeholder="Precio base" required>
+                            <label for="inputPrecio_Base">Precio base</label>
+                        </div>
+                        <button class="btnRegister" (click)="addField()">Añadir cancha</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="FieldsForm" *ngIf="router.url != '/admin/fields/add'">
+            <h5>Editar cancha</h5>
+            <form>
+                <div class="row register-form">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            <input type="number" [(ngModel)]="field.id" name="id" id="inputID" class="form-control" placeholder="ID" required autofocus>
+                            <label for="inputID">ID</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" [(ngModel)]="field.deporte" name="deporte" id="inputDeporte" class="form-control" placeholder="Deporte" required>
+                            <label for="inputDeporte">Deporte</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="number" [(ngModel)]="field.precio_Base" name="precio_base" id="inputPrecio_Base" class="form-control" placeholder="Precio base" required>
+                            <label for="inputPrecio_Base">Precio base</label>
+                        </div>
+                        <button class="btnRegister" (click)="editField()">Editar cancha</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>    
+</div>

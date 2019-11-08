@@ -1,0 +1,56 @@
+<app-admin></app-admin>
+<div class="page-wrapper chiller-theme toggled">
+    <main class="page-content">
+        <div>
+            <div class="card-header bg-dark text-white" style="height: 10%">
+                <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
+                    <flash-messages></flash-messages>
+                </div>
+                <i class="fas fa-calendar-alt"></i> Horarios
+                <a routerLink ="/admin/scheds/add" class="btn btn-success" style="float: right;">Añadir nuevo</a></div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Hora inicio</th>
+                                <th>Hora termino</th>
+                                <th colspan="2">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Hora inicio</th>
+                                <th>Hora termino</th>
+                                <th colspan="2">Acciones</th>
+                            </tr>
+                        </tfoot>
+                        <tbody *ngFor="let sched of scheds">
+                            <tr>
+                                <td>
+                                    {{sched.id_horario}}
+                                </td>
+                                <td>
+                                    {{sched.hora_inicio}}
+                                </td>
+                                <td>
+                                    {{sched.hora_termino}}
+                                </td>
+                                <td align="Center">
+                                    <button [routerLink]="['edit', sched.id_horario]" style="color: blue; border: white; background-color: transparent;"><i class="fas fa-pencil-alt"></i></button>
+                                </td>
+                                <td align="Center">
+                                    <button style="color: red; border: white; background-color: transparent;" (click)="deleteSched(sched.id_horario)"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>    
+</div>
+
+

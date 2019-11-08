@@ -1,0 +1,45 @@
+<app-admin></app-admin>
+<div class="page-wrapper chiller-theme toggled">
+    <main class="page-content">
+        <div class="text-center" style="width: 50%; position: absolute; margin-left: 4cm;" >
+            <flash-messages></flash-messages>
+        </div>
+        <div class="FieldsForm" *ngIf="router.url == '/admin/scheds/add'">
+            <h5>Nuevo horario</h5>
+            <form> 
+                <div class="row register-form">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            <input type="time" [(ngModel)]="sched.hora_inicio" name="hora_inicio" id="inputHora_inicio" class="form-control" placeholder="Hora inicio" min="09:00:00" max="22:00:00" step="1" required autofocus>
+                            <label for="inputHora_inicio">Hora Inicio</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="time" [(ngModel)]="sched.hora_termino" name="hora_termino" id="inputHora_termino" class="form-control" placeholder="Hora termino" min="10:00:00" max="23:00:00" step="1" required autofocus>
+                            <label for="inputHora_termino">Hora termino</label>
+                        </div>
+                        <button class="btnRegister" (click)="addSched()">Añadir horario</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="FieldsForm" *ngIf="router.url != '/admin/scheds/add'">
+            <h5>Editar horario</h5>
+            <form>
+                <div class="row register-form">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            <input type="time" [(ngModel)]="sched.hora_inicio" name="hora_inicio" id="inputHora_inicio" class="form-control" placeholder="Hora inicio" min="09:00:00" max="22:00:00" step="1" required autofocus>
+                            <label for="inputHora_inicio">Hora Inicio</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="time" [(ngModel)]="sched.hora_termino" name="hora_termino" id="inputHora_termino" class="form-control" placeholder="Hora termino" min="10:00:00" max="23:00:00" step="1" required autofocus>
+                            <label for="inputHora_termino">Hora termino</label>
+                        </div>
+                        <button class="btnRegister" (click)="editSched()">Añadir horario</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>    
+</div>
+

@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <img src="../../../../assets/logo.png" width="75" height="75" alt="">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link">
+                    <font size="+2">Reserva de canchas</font>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-0 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/home">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Historial</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Canchas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Acerca</a>
+            </li>
+        </ul>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-cog"></i>
+                    {{name}}<span class="caret"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" *ngIf="acc == 'Cliente'">
+                    <a class="dropdown-item" href=""><i class="fas fa-address-card"></i> Editar informacion</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item" (click)="logOut()"><i class="fas fa-sign-out-alt"></i> Desconectarse</a>
+                </div>
+                <div class="dropdown-menu dropdown-menu-right" *ngIf="acc == 'Admin'">
+                    <a class="dropdown-item" routerLink="/admin"><i class="fas fa-cogs"></i> Administracion</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-address-card"></i> Editar informacion</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item" (click)="logOut()"><i class="fas fa-sign-out-alt"></i> Desconectarse</a>
+                </div>
+            </li>
+        </ul>    
+    </div>
+</nav>

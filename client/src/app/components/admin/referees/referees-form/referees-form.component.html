@@ -1,0 +1,70 @@
+<app-admin></app-admin>
+<div class="page-wrapper chiller-theme toggled">
+    <main class="page-content">
+        <div class="text-center" style="width: 50%; position: absolute; margin-left: 4cm;" >
+            <flash-messages></flash-messages>
+        </div>
+        <div class="adminForm" *ngIf="router.url == '/admin/referees/add'">
+            <h5>Nuevo arbitro</h5>
+            <form>
+                <div class="row register-form">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            <input type="text" [(ngModel)]="referee.nombre" name="nombre" id="inputNombre" class="form-control" placeholder="Nombre_completo" required autofocus>
+                            <label for="inputNombre">Nombre Completo</label>
+                        </div>
+                        <div class="form-group input-group">
+                            <input type="tel" [(ngModel)]="referee.rut" name="rut" minlength="9" maxlength="9" class="form-control" placeholder="Rut" required/>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="email" [(ngModel)]="referee.correo" name="correo" id="inputCorreo" class="form-control" placeholder="Correo" required>
+                            <label for="inputCorreo">Correo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" value="+569" style="max-width: 65px;" readonly>
+                            <input type="tel" [(ngModel)]="referee.nro_contacto" name="nro_contacto" class="form-control" placeholder="Telefono" minlength="8" maxlength="8" required>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" [(ngModel)]="referee.deporte" name="deporte" id="inputDeporte" class="form-control" placeholder="Deporte" required>
+                            <label for="inputDeporte">Deporte</label>
+                        </div>
+                        <button class="btnRegister" (click)="addReferee()">Añadir arbitro</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="adminForm" *ngIf="router.url != '/admin/referees/add'">
+            <h5>Editar arbitro</h5>
+            <form>
+                <div class="row register-form">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            <input type="text" [(ngModel)]="referee.nombre" name="nombre" id="inputNombre" class="form-control" placeholder="Nombre_completo" required autofocus>
+                            <label for="inputNombre">Nombre Completo</label>
+                        </div>
+                        <div class="form-group input-group">
+                            <input type="tel" [(ngModel)]="referee.rut" name="rut" minlength="9" maxlength="9" class="form-control" placeholder="Rut" required/>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="email" [(ngModel)]="referee.correo" name="correo" id="inputCorreo" class="form-control" placeholder="Correo" required>
+                            <label for="inputCorreo">Correo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" value="+569" style="max-width: 65px;" readonly>
+                            <input type="tel" [(ngModel)]="referee.nro_contacto" name="nro_contacto" class="form-control" placeholder="Telefono" minlength="8" maxlength="8" required>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" [(ngModel)]="referee.deporte" name="deporte" id="inputDeporte" class="form-control" placeholder="Deporte" required>
+                            <label for="inputDeporte">Deporte</label>
+                        </div>
+                        <button class="btnRegister" (click)="editReferee()">Editar arbitro</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>    
+</div>

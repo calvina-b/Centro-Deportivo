@@ -1,0 +1,49 @@
+<app-admin></app-admin>
+<div class="page-wrapper chiller-theme toggled">
+    <main class="page-content">
+        <div class="text-center" style="width: 50%; position: absolute; margin-left: 4cm;" >
+            <flash-messages></flash-messages>
+        </div>
+        <div class="adminForm">
+            <h5>Editar usuario</h5>
+            <form>
+                <div class="row register-form">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            <input type="text" [(ngModel)]="user.nombre" name="nombre" id="inputNombre" class="form-control" placeholder="Nombre_completo" required autofocus>
+                            <label for="inputNombre">Nombre Completo</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" [(ngModel)]="user.nombre_usuario" name="nombre_usuario" id="inputNombre_usuario" class="form-control" placeholder="Nombre Usuario" required>
+                            <label for="inputNombre_usuario">Nombre Usuario</label>
+                        </div>
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" value="+569" style="max-width: 65px;" readonly>
+                            <input type="tel" [(ngModel)]="user.telefono" name="telefono" class="form-control" placeholder="Telefono" minlength="8" maxlength="8" required>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="email" [(ngModel)]="user.correo" name="correo" id="inputCorreo" class="form-control" placeholder="Correo" required>
+                            <label for="inputCorreo">Correo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group input-group">
+                            <input type="tel" [(ngModel)]="user.rut" name="rut" minlength="8" maxlength="8" class="form-control" placeholder="Rut" required/>
+                            <input type="text" [(ngModel)]="user.dV" name="dV" minlength="1" maxlength="1" class="form-control" style="max-width: 65px;" placeholder="DV" required/>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" [(ngModel)]="user.direccion" name="direccion" id="inputDireccion" class="form-control" placeholder="Direccion" required>
+                            <label for="inputDireccion">Direccion</label>
+                        </div>
+                        <p class="Ptest ">Tipo de cuenta:</p>
+                        <select class="SelectTest" name="tipo_cuenta" [(ngModel)]="user.tipo_cuenta">
+                            <option value="Cliente">Cliente</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                        <button class="btnRegister" (click)="editUser()">Editar usuario</button>
+                    </div>
+                </div>
+            </form>
+        </div> 
+    </main>    
+</div>
