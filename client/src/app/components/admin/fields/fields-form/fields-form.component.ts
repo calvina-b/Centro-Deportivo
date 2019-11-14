@@ -58,7 +58,7 @@ export class FieldsFormComponent implements OnInit {
           this.router.navigate(['/admin/fields']);
         }, 2000);
       },
-      err => this.flashMessage.show(err.error, {cssClass: 'alert-danger', timeout: 2000})
+      err => this.flashMessage.show(err.error, {cssClass: 'alert-danger', timeout: 3000})
     );
   }
 
@@ -76,7 +76,7 @@ export class FieldsFormComponent implements OnInit {
           this.router.navigate(['/admin/fields']);
         }, 2000);
       },
-      err => console.error(err)
+      err => this.flashMessage.show(err.error, {cssClass: 'alert-danger', timeout: 3000})
     );
   }
 }

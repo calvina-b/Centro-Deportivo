@@ -75,7 +75,7 @@ export class RefereesFormComponent implements OnInit {
           this.router.navigate(['/admin/referees']);
         }, 2000);
       },
-      err => console.error(err)
+      err => this.flashMessage.show(err.error, {cssClass: 'alert-danger', timeout: 3000})
     );
   }
 
@@ -110,7 +110,7 @@ export class RefereesFormComponent implements OnInit {
           this.router.navigate(['/admin/referees']);
         }, 2000);
       },
-      err => console.error(err)
+      err => this.flashMessage.show(err.error, {cssClass: 'alert-danger', timeout: 3000})
     );
   }
 

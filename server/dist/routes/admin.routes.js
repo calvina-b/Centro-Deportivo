@@ -20,30 +20,30 @@ router.route('/users')
 router.route('/users/:id')
     .get(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.getOneUser)
     .delete(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.deleteUsers)
-    .put(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.updateUsers);
+    .put(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, verifications.checkUpdateDuplicateNameOrEmailOrRutOrPhone, adminController.updateUsers);
 // CANCHAS
 router.route('/fields')
     .get(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.getFields)
     .post(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, verifications.checkDuplicateFieldId, adminController.addFields);
 router.route('/fields/:id')
     .get(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.getOneField)
-    .put(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.updateFields)
+    .put(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, verifications.checkUpdateDuplicateFieldId, adminController.updateFields)
     .delete(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.deleteFields);
 // Arbitros
 router.route('/referees')
     .get(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.getReferees)
-    .post(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.addReferees);
+    .post(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, verifications.checkDuplicateRefereeEmailOrRutOrPhone, adminController.addReferees);
 router.route('/referees/:id')
     .get(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.getOneReferee)
-    .put(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.updateReferees)
+    .put(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, verifications.checkUpdateDuplicateRefereeEmailOrRutOrPhone, adminController.updateReferees)
     .delete(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.deleteReferees);
 // Articulos
 router.route('/items')
     .get(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.getItems)
-    .post(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.additems);
+    .post(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, verifications.checkIfExistsFieldID, adminController.additems);
 router.route('/items/:id')
     .get(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.getOneItem)
-    .put(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.updateItems)
+    .put(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, verifications.checkIfExistsFieldID, adminController.updateItems)
     .delete(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.deleteItems);
 // Horarios
 router.route('/scheds')

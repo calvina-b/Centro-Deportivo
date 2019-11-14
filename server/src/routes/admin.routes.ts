@@ -14,7 +14,7 @@ router.route('/users')
 router.route('/users/:id')
     .get(tokenValidation, isAdmin, adminController.getOneUser)
     .delete(tokenValidation, isAdmin, adminController.deleteUsers)
-    .put(tokenValidation, isAdmin, adminController.updateUsers)
+    .put(tokenValidation, isAdmin, verifications.checkUpdateDuplicateNameOrEmailOrRutOrPhone, adminController.updateUsers)
 
 // CANCHAS
 router.route('/fields')
@@ -22,25 +22,25 @@ router.route('/fields')
     .post(tokenValidation, isAdmin, verifications.checkDuplicateFieldId, adminController.addFields)
 router.route('/fields/:id')
     .get(tokenValidation, isAdmin, adminController.getOneField)
-    .put(tokenValidation, isAdmin, adminController.updateFields)
+    .put(tokenValidation, isAdmin, verifications.checkUpdateDuplicateFieldId, adminController.updateFields)
     .delete(tokenValidation, isAdmin, adminController.deleteFields)
 
 // Arbitros
 router.route('/referees')
     .get(tokenValidation, isAdmin, adminController.getReferees)
-    .post(tokenValidation, isAdmin, adminController.addReferees)
+    .post(tokenValidation, isAdmin, verifications.checkDuplicateRefereeEmailOrRutOrPhone,  adminController.addReferees)
 router.route('/referees/:id')
     .get(tokenValidation, isAdmin, adminController.getOneReferee)
-    .put(tokenValidation, isAdmin, adminController.updateReferees)
+    .put(tokenValidation, isAdmin, verifications.checkUpdateDuplicateRefereeEmailOrRutOrPhone, adminController.updateReferees)
     .delete(tokenValidation, isAdmin, adminController.deleteReferees)
     
 // Articulos
 router.route('/items')
     .get(tokenValidation, isAdmin, adminController.getItems)
-    .post(tokenValidation, isAdmin, adminController.additems)
+    .post(tokenValidation, isAdmin, verifications.checkIfExistsFieldID, adminController.additems)
 router.route('/items/:id')
     .get(tokenValidation, isAdmin, adminController.getOneItem)
-    .put(tokenValidation, isAdmin, adminController.updateItems)
+    .put(tokenValidation, isAdmin, verifications.checkIfExistsFieldID, adminController.updateItems)
     .delete(tokenValidation, isAdmin, adminController.deleteItems) 
 
 // Horarios

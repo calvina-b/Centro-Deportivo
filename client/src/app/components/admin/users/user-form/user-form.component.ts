@@ -74,7 +74,7 @@ export class UserFormComponent implements OnInit {
           this.router.navigate(['/admin/users']);
         }, 2000);
       },  
-      err => this.flashMessage.show(err.error, {cssClass: 'alert-danger', timeout: 2000})
+      err => this.flashMessage.show(err.error, {cssClass: 'alert-danger', timeout: 3000})
     )
   }
 }
