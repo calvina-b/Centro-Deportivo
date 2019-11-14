@@ -1,16 +1,35 @@
 <app-admin></app-admin>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Borrar arbitro</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p><strong>¿Estás seguro que quieres continuar?</strong></p>
+        <p>Toda la información asociada a este arbitro será borrada permanentemente.
+        <span class="text-danger">Está operacion no se puede deshacer.</span>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="d('Cancel click')">Cancelar</button>
+        <button type="button" class="btn btn-danger" ngbAutofocus (click)="deleteReferee(id); c('Ok click')">Ok</button>
+    </div>
+</ng-template>
+
 <div class="page-wrapper chiller-theme toggled">
     <main class="page-content">
         <div>
-            <div class="card-header bg-dark text-white" style="height: 10%">
+            <div class="card-header bg-dark text-white">
                 <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
                     <flash-messages></flash-messages>
                 </div>
                 <i class="fas fa-address-card"></i> Arbitros
-                <a routerLink="/admin/referees/add" class="btn btn-success" style="float: right;">Añadir nuevo</a></div>
+                <a routerLink="/admin/referees/add" class="btn btn-outline-light" style="margin-top: -6px; float: right;">Añadir nuevo</a></div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-striped" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -18,7 +37,7 @@
                                 <th>Correo</th>
                                 <th>Deporte</th>
                                 <th>Telefono</th>
-                                <th colspan="2">Acciones</th>
+                                <th colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -28,11 +47,11 @@
                                 <th>Correo</th>
                                 <th>Deporte</th>
                                 <th>Telefono</th>
-                                <th colspan="2">Acciones</th>
+                                <th colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </tfoot>
-                        <tbody *ngFor="let referee of referees">
-                            <tr>
+                        <tbody>
+                            <tr *ngFor="let referee of referees">
                                 <td>
                                     {{referee.nombre}}
                                 </td>
@@ -52,7 +71,7 @@
                                     <button [routerLink]="['edit', referee.id_arbitro]" style="color: blue; border: white; background-color: transparent;"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
                                 <td align="Center">
-                                    <button style="color: red; border: white; background-color: transparent;" (click)="deleteReferee(referee.id_arbitro)"><i class="fas fa-trash-alt"></i></button>
+                                    <button style="color: red; border: white; background-color: transparent;" (click)="openModal(content, referee.id_arbitro)"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Title } from '@angular/platform-browser';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AdminService } from '../../../../services/admin/admin.service';
 
@@ -11,9 +12,10 @@ import { AdminService } from '../../../../services/admin/admin.service';
 })
 export class FieldsListComponent implements OnInit {
 
-  fields: any = []
+  fields: any = [];
+  id: any = '';
 
-  constructor(private adminService: AdminService, private flashMessage: FlashMessagesService, private title: Title) { }
+  constructor(private adminService: AdminService, private flashMessage: FlashMessagesService, private title: Title, private modal: NgbModal) { }
 
   ngOnInit() {
     this.title.setTitle('Canchas');
@@ -37,5 +39,10 @@ export class FieldsListComponent implements OnInit {
       },
       err => console.error(err)
     )
+  }
+
+  openModal(content: any, id: string) {
+    this.id = id;
+    this.modal.open(content);
   }
 }

@@ -3,8 +3,9 @@ import express, { Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import adminRoutes from './routes/admin.routes'
-import userRoutes from './routes/user.routes'
+import adminRoutes from './routes/admin.routes';
+import userRoutes from './routes/user.routes';
+import reservaRoutes from './routes/reserva.routes';
 
 //Inicialization
 const app: Application = express();
@@ -25,6 +26,7 @@ app.use(cors({
 //Routes
 app.use('/api/auth', userRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/reserva', reservaRoutes);
 
 
 //Starting the server

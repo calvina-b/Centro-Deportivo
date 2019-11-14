@@ -1,46 +1,65 @@
 <app-admin></app-admin>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Borrar articulo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p><strong>¿Estás seguro que quieres continuar?</strong></p>
+        <p>Toda la información asociada a este articulo será borrada permanentemente.
+        <span class="text-danger">Está operacion no se puede deshacer.</span>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="d('Cancel click')">Cancelar</button>
+        <button type="button" class="btn btn-danger" ngbAutofocus (click)="deleteItem(id); c('Ok click')">Ok</button>
+    </div>
+</ng-template>
+
 <div class="page-wrapper chiller-theme toggled">
     <main class="page-content">
         <div>
-            <div class="card-header bg-dark text-white" style="height: 10%">
+            <div class="card-header bg-dark text-white">
                 <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
                     <flash-messages></flash-messages>
                 </div>
                 <i class="fas fa-basketball-ball"></i> Articulos
-                <a routerLink="/admin/items/add" class="btn btn-success" style="float: right;">Añadir nuevo</a>
+                <a routerLink="/admin/items/add" class="btn btn-outline-light" style="margin-top: -6px;float: right;">Añadir nuevo</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-striped" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Codigo</th>
-                                <th>Nombre</th>
-                                <th>ID cancha</th>
-                                <th>Deporte cancha</th>
-                                <th>Valor arriedo</th>
-                                <th>Precio costo</th>
-                                <th>Estado</th>
-                                <th colspan="2" style="text-align:center;">Acciones</th>
+                                <th scope="col">Codigo</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">ID cancha</th>
+                                <th scope="col">Deporte cancha</th>
+                                <th scope="col">Valor arriedo</th>
+                                <th scope="col">Precio costo</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Codigo</th>
-                                <th>Nombre</th>
-                                <th>ID cancha</th>
-                                <th>Deporte cancha</th>
-                                <th>Valor arriedo</th>
-                                <th>Precio costo</th>
-                                <th>Estado</th>
-                                <th colspan="2" style="text-align:center;">Acciones</th>
+                                <th scope="col">Codigo</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">ID cancha</th>
+                                <th scope="col">Deporte cancha</th>
+                                <th scope="col">Valor arriedo</th>
+                                <th scope="col">Precio costo</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </tfoot>
-                        <tbody *ngFor="let item of items">
-                            <tr>
-                                <td>
+                        <tbody>
+                            <tr *ngFor="let item of items">
+                                <th>
                                     {{item.cod}}
-                                </td>
+                                </th>
                                 <td>
                                     {{item.nombre_art}}
                                 </td>
@@ -63,7 +82,7 @@
                                     <button [routerLink]="['edit', item.cod]" style="color: blue; border: white; background-color: transparent;"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
                                 <td align="Center">
-                                    <button style="color: red; border: white; background-color: transparent;" (click)="deleteItem(item.cod)"><i class="fas fa-trash-alt"></i></button>
+                                    <button style="color: red; border: white; background-color: transparent;" (click)="openModal(content, item.cod)"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>

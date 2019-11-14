@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { RefereesListComponent } from './components/admin/referees/referees-list
 import { SchedsListComponent } from './components/admin/scheds/scheds-list/scheds-list.component';
 import { SchedsFormComponent } from './components/admin/scheds/scheds-form/scheds-form.component';
 import { ErrorComponent } from './components/error/error.component';
+import { ReservationComponent } from './components/reservation/reservation/reservation.component';
 
 
 @NgModule({
@@ -53,7 +55,8 @@ import { ErrorComponent } from './components/error/error.component';
     RefereesListComponent,
     SchedsListComponent,
     SchedsFormComponent,
-    ErrorComponent
+    ErrorComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { ErrorComponent } from './components/error/error.component';
     HttpClientModule,
     FormsModule,
     RouterModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    NgbModule
   ],
   providers: [
     Title,

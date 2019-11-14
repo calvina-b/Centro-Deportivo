@@ -5,6 +5,7 @@ import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { HomeComponent } from './components/user/home/home.component';
 import { MainComponent } from './components/admin/main/main.component';
+import { ReservationComponent } from './components/reservation/reservation/reservation.component';
 import { UserListComponent } from './components/admin/users/user-list/user-list.component';
 import { UserFormComponent } from './components/admin/users/user-form/user-form.component';
 import { FieldsListComponent } from './components/admin/fields/fields-list/fields-list.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [Guards.LoginGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [Guards.LoginGuard] },
   { path: 'home', component: HomeComponent, canActivate: [Guards.AuthGuard] },
+  { path: 'reservation', component: ReservationComponent, canActivate: [Guards.AuthGuard] },
   { path: 'admin', component: MainComponent, canActivate: [Guards.AdminGuard] },
   { path: 'admin/users', component: UserListComponent, canActivate: [Guards.AdminGuard] },
   { path: 'admin/users/edit/:id', component: UserFormComponent, canActivate: [Guards.AdminGuard] },
