@@ -25,7 +25,7 @@ app.use(cors_1.default({
 //Routes
 app.use('/api/auth', user_routes_1.default);
 app.use('/api/admin', admin_routes_1.default);
-app.use('/api/reserva', reserva_routes_1.default);
+app.use('/api/reservation', reserva_routes_1.default);
 //Starting the server
 app.listen(app.get('port'), () => {
     console.log('\nServer is running at http://localhost:' +

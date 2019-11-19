@@ -14,15 +14,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.tokenValidation = (req, res, next) => {
-    const token = req.header('auth-token');
-    if (!token) {
-        return res.status(401).json('Acceso denegado');
+    try {
+        const token = req.header('auth-token');
+        if (!token) {
+            return res.status(401).json('Acceso denegado');
+        }
+        ;
+        const payload = jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET || 'TOKENSECRET');
+        req.userID = payload.data;
+        req.admin = payload.cuenta;
+        next();
     }
-    ;
-    const payload = jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET || 'TOKENSECRET');
-    req.userID = payload.data;
-    req.admin = payload.cuenta;
-    next();
+    catch (error) {
+        return res.status(401).json('Acceso denegado. Token expirado');
+    }
 };
 exports.isAdmin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.admin == 'Admin') {

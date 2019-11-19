@@ -46,3 +46,26 @@ export interface IScheds {
     hora_inicio?: string;
     hora_termino?: string;
 }
+
+// RESERVA
+
+export interface IReservation {
+    deporte?: string;
+    fecha?: string;
+}
+
+export interface INewReservation {
+    fecha?: string;
+    valor_arriendo?: number;
+    rut_cliente?: number;
+    id_cancha?: number;
+    deporte_cancha?: string;
+    id_horario?: number;
+}
+
+export interface ITeam {
+    nombre?: string;
+    nombre_representante?: string;
+    correo_representante?: string;
+    telefono?: number;
+}

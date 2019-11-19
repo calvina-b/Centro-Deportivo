@@ -26,7 +26,7 @@ app.use(cors({
 //Routes
 app.use('/api/auth', userRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/reserva', reservaRoutes);
+app.use('/api/reservation', reservaRoutes);
 
 
 //Starting the server

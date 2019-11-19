@@ -31,6 +31,7 @@ user: IUser = {
         this.data = res;
         localStorage.setItem('name', this.data.nombre);
         localStorage.setItem('acc', this.data.tipo_cuenta);
+        localStorage.setItem('rut', this.data.rut);
         this.router.navigate(['/home']);
       },
       err => this.flashMessage.show(err.error, {cssClass: 'alert-danger', timeout: 3000})

@@ -1,4 +1,203 @@
 <app-navigation></app-navigation>
-<body class="all">
+<ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Reservar cancha</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p><strong>¿Estás seguro que quieres terminar?</strong></p>
+            <p>Una vez termines de reservar la cancha no podrás modificar ningún dato.
+            <span class="text-danger">Solo podrás anular la reserva.</span>
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="d('Cancel click')">Volver</button>
+            <button type="button" class="btn btn-success" ngbAutofocus (click)="PostNewReservation(); c('Ok click')">Ok</button>
+        </div>
+    </ng-template>
 
+<body class="reservation" *ngIf = "!isShowForm">
+    <div class="imgContainer">
+        <div>
+            <img src="../../../../assets/pngocean.com-id-wdafi.png" alt="">
+        </div>
+    </div>
+    <form>
+    <div class="rows">
+        <div class="columns">
+            <div class="Checkcontainer">
+                <h3>Deporte</h3>
+                <div class="form-check">
+                    <input class="form-check-input" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputFutbol" value="Fútbol" checked>
+                    <label class="form-check-label" for="inputFutbol">
+                    Fútbol
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputBasquet" value="basketBall">
+                    <label class="form-check-label" for="inputBasquet">
+                    Basketall
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputTenis" value="Tenis">
+                    <label class="form-check-label" for="inputTenis">
+                    Tenis
+                    </label>
+                </div>
+            </div>    
+        </div>
+    </div>
+    <button class="btnCons btn btn-light" (click)="PostReservation(); tableDisplay()">Consultar</button>
+    </form>
+    
+    <div class="container" *ngIf = "isShowTable">
+        <div class="card-body">
+            <div class="table-responsive" style="background-color: rgba(255, 255, 255, 0.897); margin-top: -6.9rem;">
+                <table class="table table-striped" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID cancha</th>
+                            <th scope="col">Deporte</th>
+                            <th scope="col">Hora inicio</th>
+                            <th scope="col">Hora termino</th>
+                            <th scope="col">Precio base</th>
+                            <th scope="col" style="text-align: center;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let reservation of reservations">
+                            <td>
+                                {{reservation.id}}
+                            </td>
+                            <td>
+                                {{reservation.deporte}}
+                            </td>
+                            <td>
+                                {{reservation.hora_inicio}}
+                            </td>
+                            <td>
+                                {{reservation.hora_termino}}
+                            </td>
+                            <td>
+                                ${{reservation.precio}}
+                            </td>
+                            <td align="Center">
+                                <button type="button" class="btn btn-success" (click)="onSelect(reservation); formDisplay()">Continuar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <ngb-pagination class="d-flex justify-content-center" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination> 
+    </div>
+</body>
+
+<body class="reservation" *ngIf = "isShowForm">
+    <div class="text-center mt-2" style="width: 50%; position: absolute; margin-left: 13.3cm;" >
+        <flash-messages></flash-messages>
+    </div>
+    <div class="imgContainer">
+        <div>
+            <img src="../../../../assets/pngocean.com-id-wdafi.png" alt="">
+        </div>
+    </div>
+
+    <div class="infoContainer">
+        <h3 align="center">Datos de reserva</h3>
+        <div class="row register-form">
+            <div class="col-md-6">
+                <div class="form-label-group">
+                    <input type="text" [(ngModel)]="newReservation.id_cancha" id="inputID" class="form-control" placeholder="ID cancha" disabled>
+                    <label for="inputID">ID cancha</label>
+                </div>
+                <div class="form-label-group">
+                    <input type="text" [(ngModel)]="newReservation.deporte_cancha" id="inputDeporte" class="form-control" placeholder="Deporte" disabled>
+                    <label for="inputDeporte">Deporte</label>
+                </div>
+                <div class="form-label-group">
+                    <input type="text" [(ngModel)]="newReservation.fecha" id="inputFecha" class="form-control" placeholder="Fecha" disabled>
+                    <label for="inputFecha">Fecha</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-label-group">
+                    <input type="text" [(ngModel)]="reservationHour.hora_inicio" id="inputInicio" class="form-control" placeholder="Hora inicio" disabled>
+                    <label for="inputInicio">Hora inicio</label>
+                </div>
+                <div class="form-label-group">
+                    <input type="text" [(ngModel)]="reservationHour.hora_termino" id="inputTermino" class="form-control" placeholder="Hora termino" disabled>
+                    <label for="inputTermino">Hora termino</label>
+                </div>
+                <div class="form-label-group">
+                    <input type="text" [(ngModel)]="newReservation.valor_arriendo" id="inputTotal" class="form-control" placeholder="Total $" disabled>
+                    <label for="inputTotal">Total</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="teamAContainer">
+        <h3 align="center">Datos equipo A</h3>
+        <form>
+            <div class="row register-form">
+                <div class="col-md-6">
+                    <div class="form-label-group">
+                        <input type="text" id="inputName" name="nombre" [(ngModel)]="teamA.nombre" class="form-control" placeholder="Nombre equipo" maxlength="20" required autofocus>
+                        <label for="inputName">Nombre equipo</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" id="inputNameRep" name="nombre_representante" [(ngModel)]="teamA.nombre_representante" class="form-control" maxlength="15" placeholder="Nombre representante" required>
+                        <label for="inputNameRep">Nombre representante</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-label-group">
+                        <input type="text" id="inputEmail" name="correo_representante" [(ngModel)]="teamA.correo_representante" class="form-control" placeholder="Correo" maxlength="30" required>
+                        <label for="inputEmail">Correo</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" id="inputTel" name="telefono" [(ngModel)]="teamA.telefono" class="form-control" placeholder="Telefono" minlength="8" maxlength="8" required>
+                        <label for="inputTel">Telefono</label>
+                    </div>
+                </div>
+            </div>
+        </form>    
+    </div>
+
+    <div class="teamBContainer">
+        <h3 align="center">Datos equipo B</h3>
+        <form>
+            <div class="row register-form">
+                <div class="col-md-6">
+                    <div class="form-label-group">
+                        <input type="text" id="inputNameB" name="nombre" [(ngModel)]="teamB.nombre" class="form-control" placeholder="Nombre equipo" maxlength="20" required autofocus>
+                        <label for="inputNameB">Nombre equipo</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" id="inputNameRepB" name="nombre_representante" [(ngModel)]="teamB.nombre_representante" class="form-control" placeholder="Nombre representante" maxlength="15" required>
+                        <label for="inputNameRepB">Nombre representante</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-label-group">
+                        <input type="text" id="inputEmailB" name="correo_representante" [(ngModel)]="teamB.correo_representante" class="form-control" placeholder="Correo" maxlength="30" required>
+                        <label for="inputEmailB">Correo</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" id="inputTelB" name="telefono" [(ngModel)]="teamB.telefono" class="form-control" placeholder="Telefono" minlength="8" maxlength="8" required>
+                        <label for="inputTelB">Telefono</label>
+                    </div>
+                </div>
+            </div>
+        </form>    
+    </div>
+    <div id="outer">
+        <div class="inner"><button type="button" class="btn btn-secondary" (click)="reload()">Volver</button></div>
+        <div class="inner"><button type="button" class="btn btn-success" (click)="openModal(content)">Reservar</button></div>
+    </div> 
 </body>

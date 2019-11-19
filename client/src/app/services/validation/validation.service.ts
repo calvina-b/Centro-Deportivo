@@ -80,4 +80,16 @@ export class ValidationService {
       return true;
     }
   }
+
+  // VALIDACIONES TEAM RESERVA
+
+  validateTeam(team: Model.ITeam) {
+    if(team.nombre == undefined || team.nombre_representante == undefined || team.correo_representante == undefined || team.telefono == undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
 }
+

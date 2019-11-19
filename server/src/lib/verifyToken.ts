@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import db from '../database';
 import jwt from 'jsonwebtoken';
 
 interface IPayload {
@@ -18,14 +17,18 @@ declare global {
 }
 
 export const tokenValidation = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.header('auth-token');
-  if (!token) {
-    return res.status(401).json('Acceso denegado');
-  };
-  const payload = jwt.verify(token, process.env.TOKEN_SECRET || 'TOKENSECRET') as IPayload;
-  req.userID = payload.data;
-  req.admin = payload.cuenta;
-  next();
+  try {
+    const token = req.header('auth-token');
+    if (!token) {
+      return res.status(401).json('Acceso denegado');
+    };
+    const payload = jwt.verify(token, process.env.TOKEN_SECRET || 'TOKENSECRET') as IPayload;
+    req.userID = payload.data;
+    req.admin = payload.cuenta;
+    next();
+  } catch (error) {
+    return res.status(401).json('Acceso denegado. Token expirado');
+  }
 };
 
 export const isAdmin = async (req: Request, res: Response, next: NextFunction) => {

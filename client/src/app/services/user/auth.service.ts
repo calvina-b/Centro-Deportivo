@@ -40,5 +40,6 @@ export class AuthService {
     localStorage.removeItem('auth-token');
     localStorage.removeItem('name');
     localStorage.removeItem('acc');
+    localStorage.removeItem('rut');
   }
 }

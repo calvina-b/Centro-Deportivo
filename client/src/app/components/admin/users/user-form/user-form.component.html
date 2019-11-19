@@ -18,7 +18,7 @@
                             <label for="inputNombre_usuario">Nombre Usuario</label>
                         </div>
                         <div class="form-group input-group">
-                            <input type="text" class="form-control" value="+569" style="max-width: 65px;" readonly>
+                            <span type="text" class="form-control" style="max-width: 65px;" readonly>+569</span>
                             <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" [(ngModel)]="user.telefono" name="telefono" class="form-control" placeholder="Telefono" minlength="8" maxlength="8" required>
                         </div>
                         <div class="form-label-group">

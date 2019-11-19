@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Title } from '@angular/platform-browser';
-import { IFields } from '../../../../models/Models';
 
+import { IFields } from '../../../../models/Models';
 import { AdminService } from '../../../../services/admin/admin.service';
 import { ValidationService } from '../../../../services/validation/validation.service';
 
@@ -13,8 +13,6 @@ import { ValidationService } from '../../../../services/validation/validation.se
   styleUrls: ['./fields-form.component.css']
 })
 export class FieldsFormComponent implements OnInit {
-
-  
 
   field: IFields = {
     id: null,

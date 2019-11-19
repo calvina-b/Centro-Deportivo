@@ -18,6 +18,16 @@ body.all {
     padding: 0;
 }
 
+body.reservation {
+    background: url('./assets/fondo.jpg') no-repeat;
+    overflow: hidden;
+    background-size: cover;
+    width: 100%;
+    height: 126vh;
+    margin: 0;
+    padding: 0;
+}
+
 body.register {
     background: url('./assets/fondo.jpg') no-repeat;
     overflow: hidden;
@@ -151,6 +161,15 @@ body.register {
 .imgContainer {
     margin-top: -5px;
     padding: 3rem;
+}
+
+.Checkcontainer {
+    margin-top: -3rem;
+    background: white;
+    vertical-align: middle;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.897);
+    border-radius: 1rem;
 }
 
 
@@ -805,8 +824,9 @@ body.register {
 }
 
 .btnCons {
-    margin-left: 1000px;
+    margin-left: 600px;
     margin-top: -180px;
+    background-color: rgba(255, 255, 255, 0.897);
 }
 
 /* ERROR PAGE */
@@ -897,4 +917,62 @@ body.register {
     .notfound .notfound-404 h1 {
         font-size: 112px;
     }
+}
+
+ngb-pagination .page-link {
+    background-color: rgba(255, 255, 255, 0.897);
+    color: black;
+}
+
+ngb-pagination .page-item.active .page-link {
+    background-color: #35c955;
+    border-color: #35c955;
+}
+
+.infoContainer {
+    background-color: rgba(255, 255, 255, 0.897);
+    width: 330px;
+    border-radius: 1rem;
+    align-items: center;
+    padding: 10px;
+    margin-left: 1.5rem;
+}
+
+.teamAContainer {
+    background-color: rgba(255, 255, 255, 0.897);
+    width: 900px;
+    border-radius: 1rem;
+    align-items: center;
+    padding: 10px;
+    margin-left: 24rem;
+    margin-top: -34rem;
+}
+
+.teamBContainer {
+    background-color: rgba(255, 255, 255, 0.897);
+    width: 900px;
+    border-radius: 1rem;
+    align-items: center;
+    padding: 10px;
+    margin-left: 24rem;
+    margin-top: 1rem;
+}
+
+#btn1 {
+    margin-top: 4rem;
+    margin-left: 20rem;
+}
+#btn2 {
+    margin-top: 4rem;
+    margin-left: 24rem;
+}
+
+#outer {
+    width:100%;
+    text-align: center;
+}
+.inner {
+    display: inline-block;
+    padding: 50px;
+    margin-top: 8rem;
 }
