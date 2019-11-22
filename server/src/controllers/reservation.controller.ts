@@ -10,16 +10,16 @@ export const reservation = async (req: Request, res: Response) => {
     const day: Date = new Date(fecha);
 
     if (fecha == currentDate) {
-        const weekendSched = await db.query('SELECT C.id, C.deporte, C.precio_base AS precio, H.id_horario, H.hora_inicio, H.hora_termino from cancha AS C, horarios AS H WHERE deporte = ? AND hora_inicio >= ?', [deporte, currentHour]);
+        const weekendSched = await db.query('SELECT C.id, C.deporte, C.precio_base AS precio, H.id_horario, H.hora_inicio, H.hora_termino FROM cancha AS C, horarios AS H WHERE deporte = ? AND hora_inicio >= ?', [deporte, currentHour]);
         res.json(weekendSched)
     } else if (fecha == currentDate && (day.getDay() == 6 || day.getDay() == 0)) {
-        const weekendSched = await db.query('SELECT C.id, C.deporte, (C.precio_base*1.20) AS precio, H.id_horario, H.hora_inicio, H.hora_termino from cancha AS C, horarios AS H WHERE deporte = ? AND hora_inicio >= ?', [deporte, currentHour]);
+        const weekendSched = await db.query('SELECT C.id, C.deporte, (C.precio_base*1.20) AS precio, H.id_horario, H.hora_inicio, H.hora_termino FROM cancha AS C, horarios AS H WHERE deporte = ? AND hora_inicio >= ?', [deporte, currentHour]);
         res.json(weekendSched)
     } else if (day.getDay() == 6 || day.getDay() == 0) {
-        const weekendSched = await db.query('SELECT C.id, C.deporte, (C.precio_base*1.20) AS precio, H.id_horario, H.hora_inicio, H.hora_termino from cancha AS C, horarios AS H WHERE deporte = ?', [deporte]);
+        const weekendSched = await db.query('SELECT C.id, C.deporte, (C.precio_base*1.20) AS precio, H.id_horario, H.hora_inicio, H.hora_termino FROM cancha AS C, horarios AS H WHERE deporte = ?', [deporte]);
         res.json(weekendSched)
     } else {
-        const weekSched = await db.query('SELECT C.id, C.deporte, C.precio_base AS precio, H.id_horario, H.hora_inicio, H.hora_termino from cancha AS C, horarios AS H WHERE deporte = ?', [deporte]);
+        const weekSched = await db.query('SELECT C.id, C.deporte, C.precio_base AS precio, H.id_horario, H.hora_inicio, H.hora_termino FROM cancha AS C, horarios AS H WHERE deporte = ?', [deporte]);
         res.json(weekSched)
     }
 };
@@ -52,8 +52,16 @@ export const newReservation = async (req: Request, res: Response) => {
         num_reserva: numReservation[0].num_reserva,
     }
 
+    const registry = {
+        num_reserva: numReservation[0].num_reserva,
+        fecha: req.body[0].fecha,
+        id_horario: req.body[0].id_horario,
+        id_cancha: req.body[0].id_cancha,
+    }
+
     await db.query('INSERT INTO equipo SET ?', [reservationTeamA]);
     await db.query('INSERT INTO equipo SET ?', [reservationTeamB]);
+    await db.query('INSERT INTO registro SET ?', [registry]);
 
     res.json({message: 'Cancha reservada correctamente'})
 };

@@ -17,39 +17,42 @@
             <button type="button" class="btn btn-success" ngbAutofocus (click)="PostNewReservation(); c('Ok click')">Ok</button>
         </div>
     </ng-template>
-
 <body class="reservation" *ngIf = "!isShowForm">
     <div class="imgContainer">
         <div>
             <img src="../../../../assets/pngocean.com-id-wdafi.png" alt="">
-        </div>
+        </div>   
     </div>
     <form>
     <div class="rows">
         <div class="columns">
             <div class="Checkcontainer">
                 <h3>Deporte</h3>
+                <br/>
                 <div class="form-check">
-                    <input class="form-check-input" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputFutbol" value="Fútbol" checked>
+                    <input class="form-check-input" style="vertical-align: middle;" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputFutbol" value="Fútbol" checked>
                     <label class="form-check-label" for="inputFutbol">
                     Fútbol
                     </label>
                 </div>
+                <br/>
                 <div class="form-check">
-                    <input class="form-check-input" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputBasquet" value="basketBall">
+                    <input class="form-check-input" style="vertical-align: middle;" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputBasquet" value="basketBall">
                     <label class="form-check-label" for="inputBasquet">
                     Basketall
                     </label>
                 </div>
+                <br/>
                 <div class="form-check">
-                    <input class="form-check-input" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputTenis" value="Tenis">
+                    <input class="form-check-input" style="vertical-align: middle;" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputTenis" value="Tenis">
                     <label class="form-check-label" for="inputTenis">
                     Tenis
                     </label>
                 </div>
-            </div>    
-        </div>
+            </div>   
+        </div> 
     </div>
+    <ngb-datepicker #dp class="datepick" [minDate]="minDate" [startDate]="minDate" [(ngModel)]="model" name="date" (ngModelChange)="selectDate(model)"></ngb-datepicker> 
     <button class="btnCons btn btn-light" (click)="PostReservation(); tableDisplay()">Consultar</button>
     </form>
     
@@ -61,6 +64,7 @@
                         <tr>
                             <th scope="col">ID cancha</th>
                             <th scope="col">Deporte</th>
+                            <th scope="col">Fecha</th>
                             <th scope="col">Hora inicio</th>
                             <th scope="col">Hora termino</th>
                             <th scope="col">Precio base</th>
@@ -74,6 +78,9 @@
                             </td>
                             <td>
                                 {{reservation.deporte}}
+                            </td>
+                            <td>
+                                {{date}}
                             </td>
                             <td>
                                 {{reservation.hora_inicio}}

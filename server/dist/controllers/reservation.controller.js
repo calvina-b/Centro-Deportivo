@@ -20,19 +20,19 @@ exports.reservation = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     const currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " ";
     const day = new Date(fecha);
     if (fecha == currentDate) {
-        const weekendSched = yield database_1.default.query('SELECT C.id, C.deporte, C.precio_base AS precio, H.id_horario, H.hora_inicio, H.hora_termino from cancha AS C, horarios AS H WHERE deporte = ? AND hora_inicio >= ?', [deporte, currentHour]);
+        const weekendSched = yield database_1.default.query('SELECT C.id, C.deporte, C.precio_base AS precio, H.id_horario, H.hora_inicio, H.hora_termino FROM cancha AS C, horarios AS H WHERE deporte = ? AND hora_inicio >= ?', [deporte, currentHour]);
         res.json(weekendSched);
     }
     else if (fecha == currentDate && (day.getDay() == 6 || day.getDay() == 0)) {
-        const weekendSched = yield database_1.default.query('SELECT C.id, C.deporte, (C.precio_base*1.20) AS precio, H.id_horario, H.hora_inicio, H.hora_termino from cancha AS C, horarios AS H WHERE deporte = ? AND hora_inicio >= ?', [deporte, currentHour]);
+        const weekendSched = yield database_1.default.query('SELECT C.id, C.deporte, (C.precio_base*1.20) AS precio, H.id_horario, H.hora_inicio, H.hora_termino FROM cancha AS C, horarios AS H WHERE deporte = ? AND hora_inicio >= ?', [deporte, currentHour]);
         res.json(weekendSched);
     }
     else if (day.getDay() == 6 || day.getDay() == 0) {
-        const weekendSched = yield database_1.default.query('SELECT C.id, C.deporte, (C.precio_base*1.20) AS precio, H.id_horario, H.hora_inicio, H.hora_termino from cancha AS C, horarios AS H WHERE deporte = ?', [deporte]);
+        const weekendSched = yield database_1.default.query('SELECT C.id, C.deporte, (C.precio_base*1.20) AS precio, H.id_horario, H.hora_inicio, H.hora_termino FROM cancha AS C, horarios AS H WHERE deporte = ?', [deporte]);
         res.json(weekendSched);
     }
     else {
-        const weekSched = yield database_1.default.query('SELECT C.id, C.deporte, C.precio_base AS precio, H.id_horario, H.hora_inicio, H.hora_termino from cancha AS C, horarios AS H WHERE deporte = ?', [deporte]);
+        const weekSched = yield database_1.default.query('SELECT C.id, C.deporte, C.precio_base AS precio, H.id_horario, H.hora_inicio, H.hora_termino FROM cancha AS C, horarios AS H WHERE deporte = ?', [deporte]);
         res.json(weekSched);
     }
 });
@@ -61,7 +61,14 @@ exports.newReservation = (req, res) => __awaiter(void 0, void 0, void 0, functio
         telefono: req.body[2].telefono,
         num_reserva: numReservation[0].num_reserva,
     };
+    const registry = {
+        num_reserva: numReservation[0].num_reserva,
+        fecha: req.body[0].fecha,
+        id_horario: req.body[0].id_horario,
+        id_cancha: req.body[0].id_cancha,
+    };
     yield database_1.default.query('INSERT INTO equipo SET ?', [reservationTeamA]);
     yield database_1.default.query('INSERT INTO equipo SET ?', [reservationTeamB]);
+    yield database_1.default.query('INSERT INTO registro SET ?', [registry]);
     res.json({ message: 'Cancha reservada correctamente' });
 });

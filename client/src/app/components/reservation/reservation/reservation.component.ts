@@ -1,24 +1,61 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable} from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
+import {NgbDateStruct, NgbDatepickerI18n, NgbDatepickerConfig, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 import * as Model from '../../../models/Models';
 import { ReservationService } from '../../../services/reservation/reservation.service';
 import { ValidationService } from '../../../services/validation/validation.service';
 
+const I18N_VALUES = {
+  'es': {
+    weekdays: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'],
+    months: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+  }
+};
+
+@Injectable()
+export class I18n {
+  language = 'es';
+}
+
+@Injectable()
+export class CustomDatepickerI18n extends NgbDatepickerI18n {
+
+  constructor(private _i18n: I18n) {
+    super();
+  }
+
+  getWeekdayShortName(weekday: number): string {
+    return I18N_VALUES[this._i18n.language].weekdays[weekday - 1];
+  }
+  getMonthShortName(month: number): string {
+    return I18N_VALUES[this._i18n.language].months[month - 1];
+  }
+  getMonthFullName(month: number): string {
+    return this.getMonthShortName(month);
+  }
+
+  getDayAriaLabel(date: NgbDateStruct): string {
+    return `${date.day}-${date.month}-${date.year}`;
+  }
+}
 
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
-  styleUrls: ['./reservation.component.css']
+  styleUrls: ['./reservation.component.css'],
+  providers: [I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}]
 })
 export class ReservationComponent implements OnInit {
 
+  model: NgbDateStruct;
+
   reservationForm: Model.IReservation = {
     deporte: 'Fútbol',
-    fecha: '2019-11-19 ',
+    fecha: '',
   };
 
   reservationSched: any = [];
@@ -54,13 +91,30 @@ export class ReservationComponent implements OnInit {
   isShowTable = false;
   isShowForm = false;
 
-  constructor(private reservationService: ReservationService, private validationService: ValidationService, private router: Router, private activatedRoute: ActivatedRoute, private title: Title, private flashMessage: FlashMessagesService, private modal: NgbModal) { }
+  minDate = undefined;
+  date = '';
+
+  constructor(private reservationService: ReservationService, private validationService: ValidationService, private router: Router, private activatedRoute: ActivatedRoute, private title: Title, private flashMessage: FlashMessagesService, private modal: NgbModal, private calendar: NgbCalendar) {
+
+    const current = new Date();
+    this.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate()
+    };
+
+   }
 
   ngOnInit() {
     this.title.setTitle('Reserva');
+    this.model = this.calendar.getToday();
   }
 
   PostReservation() {
+    if(this.reservationForm.fecha == ''){
+      this.reservationForm.fecha = this.minDate.year + '-' + this.minDate.month + '-' + this.minDate.day + ' ';
+    }
+    this.date = this.reservationForm.fecha;
     this.reservationService.Reservation(this.reservationForm).subscribe(
       res => {
         this.reservationSched = res;
@@ -150,4 +204,7 @@ export class ReservationComponent implements OnInit {
     this.modal.open(content);
   }
 
+  selectDate(date: any){
+    this.reservationForm.fecha = date.year + '-' + date.month + '-' + date.day + ' ';
+  }
 }

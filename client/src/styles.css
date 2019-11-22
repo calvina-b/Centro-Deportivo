@@ -164,12 +164,13 @@ body.register {
 }
 
 .Checkcontainer {
-    margin-top: -3rem;
-    background: white;
+    margin-top: -5rem;
     vertical-align: middle;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.897);
     border-radius: 1rem;
+    width: 12rem;
+    height: 13.7rem;
 }
 
 
@@ -824,8 +825,8 @@ body.register {
 }
 
 .btnCons {
-    margin-left: 600px;
-    margin-top: -180px;
+    margin-left: 614px;
+    margin-top: -210px;
     background-color: rgba(255, 255, 255, 0.897);
 }
 
@@ -975,4 +976,30 @@ ngb-pagination .page-item.active .page-link {
     display: inline-block;
     padding: 50px;
     margin-top: 8rem;
+}
+
+.datepick {
+    background-color: rgba(255, 255, 255, 0.897);
+    position: absolute;
+    margin-top: -18.1rem;
+    margin-left: 45rem;
+}
+
+.ngb-dp-day {
+    width: 1.7rem !important;
+    height: 1.5rem !important;
+}
+  
+.ngb-dp-day > div {
+    width: 1.7rem !important;
+    height: 1.5rem !important;
+    line-height: 1.5rem !important;
+}
+  
+.ngb-dp-weekday {
+    width: 1.7rem !important;
+}
+
+.ngb-dp-today {
+    background-color: #5cb85c;
 }
