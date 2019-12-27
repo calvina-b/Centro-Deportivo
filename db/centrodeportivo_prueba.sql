@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
--- Host: localhost    Database: centrodeportivo_prueba
+-- Host: localhost    Database: cd
 -- ------------------------------------------------------
 -- Server version	8.0.16
 
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `articulo`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `articulo` (
   `cod` int(10) NOT NULL,
-  `id_cancha` int(3) NOT NULL,
+  `id_cancha` int(11) NOT NULL,
   `deporte_cancha` varchar(12) NOT NULL,
   `nombre_art` varchar(30) NOT NULL,
   `valor` int(9) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `articulo` (
 
 LOCK TABLES `articulo` WRITE;
 /*!40000 ALTER TABLE `articulo` DISABLE KEYS */;
-INSERT INTO `articulo` VALUES (1,101,'fyuu','aa',1,1,'MAL ESTADO'),(5461234,101,'Fútbol','Balón',2000,25000,'BUEN ESTADO'),(5461234,102,'Fútbol','Balón',2000,25000,'BUEN ESTADO'),(5461235,101,'Fútbol','Set de petos',3500,17000,'BUEN ESTADO'),(5461235,102,'Fútbol','Set de petos',3500,17000,'BUEN ESTADO'),(5461238,201,'BasketBall','Balón',2000,25000,'BUEN ESTADO');
+INSERT INTO `articulo` VALUES (5461234,101,'Fútbol','Balón',2000,25000,'BUEN ESTADO'),(5461234,102,'Fútbol','Balón',2000,25000,'BUEN ESTADO'),(5461235,101,'Fútbol','Set de petos',3500,17000,'BUEN ESTADO'),(5461235,102,'Fútbol','Set de petos',3500,17000,'BUEN ESTADO'),(5461238,201,'BasketBall','Balón',2000,25000,'BUEN ESTADO');
 /*!40000 ALTER TABLE `articulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,8 +83,9 @@ CREATE TABLE `equipo` (
   `nombre_representante` varchar(15) NOT NULL,
   `correo_representante` varchar(40) NOT NULL,
   `telefono` int(11) DEFAULT NULL,
-  `num_reserva` int(8) NOT NULL,
-  PRIMARY KEY (`num_reserva`,`nombre`,`nombre_representante`)
+  `num_reserva` int(8) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`num_reserva`,`nombre`,`nombre_representante`),
+  CONSTRAINT `equipo_reserva` FOREIGN KEY (`num_reserva`) REFERENCES `reserva` (`num_reserva`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -94,7 +95,7 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES ('Equipo A','Alexis Sánchez','alexissanchez@gmail.com',NULL,1),('Equipo B','Lionel Messi','liopechofriomessi@gmail.com',NULL,1),('Equipo A','Alexis Sánchez','alexissanchez@gmail.com',NULL,2),('Equipo B','Lionel Messi','liopechofriomessi@gmail.com',NULL,2);
+INSERT INTO `equipo` VALUES ('Equipo A','Alexis Sánchez','alexissanchez@gmail.com',NULL,00000009),('Equipo B','Lionel Messi','liopechofriomessi@gmail.com',NULL,00000009),('Equipo A','Seth Curry','sethc@gmail.com',NULL,00000010),('Equipo B','LeBron James','LBJames@gmail.com',NULL,00000010);
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +111,7 @@ CREATE TABLE `horarios` (
   `hora_inicio` time NOT NULL,
   `hora_termino` time NOT NULL,
   PRIMARY KEY (`id_horario`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +160,7 @@ DROP TABLE IF EXISTS `registro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `registro` (
-  `num_reserva` int(8) NOT NULL,
+  `num_reserva` int(8) unsigned zerofill NOT NULL,
   `fecha` date NOT NULL,
   `id_horario` int(11) NOT NULL,
   `id_cancha` int(11) NOT NULL,
@@ -176,6 +177,7 @@ CREATE TABLE `registro` (
 
 LOCK TABLES `registro` WRITE;
 /*!40000 ALTER TABLE `registro` DISABLE KEYS */;
+INSERT INTO `registro` VALUES (00000010,'2019-09-08',12,303,'RESERVADO'),(00000013,'2019-09-05',4,102,'RESERVADO'),(00000014,'2019-09-05',4,101,'RESERVADO');
 /*!40000 ALTER TABLE `registro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,15 +192,22 @@ CREATE TABLE `reserva` (
   `num_reserva` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
   `valor_arriendo` int(6) NOT NULL,
-  `rut_cliente` int(8) NOT NULL,
   `id_cancha` int(11) NOT NULL,
   `deporte_cancha` varchar(12) NOT NULL,
   `id_horario` int(11) NOT NULL,
+  `rut_cliente` int(8) NOT NULL,
+  `reserved_referee` int(2) DEFAULT NULL,
   PRIMARY KEY (`num_reserva`,`fecha`,`id_cancha`,`id_horario`),
   KEY `id_cancha` (`id_cancha`),
   KEY `idx_registro` (`fecha`,`id_horario`,`id_cancha`),
-  CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`id_cancha`) REFERENCES `cancha` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `user_reserva` (`rut_cliente`),
+  KEY `arbitraje` (`reserved_referee`),
+  KEY `horario_reserva` (`id_horario`),
+  CONSTRAINT `arbitraje` FOREIGN KEY (`reserved_referee`) REFERENCES `referee` (`id_arbitro`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `horario_reserva` FOREIGN KEY (`id_horario`) REFERENCES `horarios` (`id_horario`),
+  CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`id_cancha`) REFERENCES `cancha` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_reserva` FOREIGN KEY (`rut_cliente`) REFERENCES `usuario` (`rut`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,33 +216,8 @@ CREATE TABLE `reserva` (
 
 LOCK TABLES `reserva` WRITE;
 /*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
-INSERT INTO `reserva` VALUES (00000001,'2019-09-05',22000,11111111,102,'Fútbol',4),(00000002,'2019-09-05',22000,11111111,101,'Fútbol',4),(00000003,'2019-09-05',22000,11111111,202,'BasketBall',6),(00000004,'2019-09-05',22000,11111111,202,'BasketBall',6),(00000005,'2019-09-08',18000,11111111,303,'Tenis',12);
+INSERT INTO `reserva` VALUES (00000009,'2019-09-05',22000,202,'BasketBall',6,15208339,NULL),(00000010,'2019-09-08',18000,303,'Tenis',12,15208339,NULL),(00000013,'2019-09-05',22000,102,'Fútbol',4,19490050,NULL),(00000014,'2019-09-05',22000,101,'Fútbol',4,19490050,NULL);
 /*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sessions`
---
-
-DROP TABLE IF EXISTS `sessions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `sessions` (
-  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `expires` int(11) unsigned NOT NULL,
-  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  PRIMARY KEY (`session_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sessions`
---
-
-LOCK TABLES `sessions` WRITE;
-/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('6DNKPD288k47eMORZODGlzlMafcpocr0',1569524182,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":1},\"data\":{\"fecha\":\"2019-09-28\",\"deporte\":\"basketBall\"}}'),('In5SbiQLXieafp05-6ASvHD2WvGUe6cD',1570574650,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),('XXnW4gKOwVtdKuDJDXS6vYYaekfTwxH8',1569470719,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":1},\"data\":{\"fecha\":\"2019-09-28\",\"deporte\":\"Fútbol\"}}');
-/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -254,8 +238,9 @@ CREATE TABLE `usuario` (
   `telefono` int(11) NOT NULL,
   `password` varchar(60) NOT NULL,
   `nombre_usuario` varchar(16) NOT NULL,
-  PRIMARY KEY (`id_usuario`,`rut`,`nombre_usuario`,`correo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id_usuario`,`rut`),
+  UNIQUE KEY `correo` (`correo`,`nombre_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,7 +249,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,11111111,'1','Admin','Admin@admin.com','Admin','Admin',11111111,'$2b$10$XSwHvzu/7fVV1KzASzOhAeuf5kk.qgW5/VLHt4WiS73A8nz.RKFzO','Admin'),(2,22222222,'2','Admin2','Admin2@admin2.com','Admin','Admin2',22222222,'$2b$10$1vrIfLH8pK6A95iabUZfv.O.AIpKgFfYnG7RvDB.m/6h2DwhX2HRy','Admin2'),(3,33333333,'3','Cliente','Cliente@cliente.com','Cliente','cliente',33333333,'$2b$10$87CR.dQ4ftgwum1sIT0hm.rDS9nY0zq2LKunA9d21Q.6dhKbVo6e2','Cliente'),(4,44444444,'4','Cliente2','Cliente2@cliente2.com','Cliente','cliente2',44444444,'$2b$10$pPj6Y3qJiaODi.LgPnrNTefXUgtcRFdunjryONwHtfyn8j5IkHQZi','Cliente2');
+INSERT INTO `usuario` VALUES (11111111,'k','Sujeto de Pruebas','eltiporeservador@hotmail.com','Cliente','Una más estándar que la anterior',123456789,'qwerty123','Reservador'),(13990115,'0','Camilo Alviña','camilo.alvina@alumnos.uv.cl','Cliente','Otra dirección',998549768,'qwerty123','Camilitro'),(15208339,'4','Augusto Pinochet','augusto.pinochet@alumnos.uv.cl','Cliente','Dirección estándar',963711058,'qwerty123','Pinochan'),(19490050,'3','Jorge Hernández','jorge.hernandeze@alumnos.uv.cl','Admin','Pje. Celia Castro #1572, Placilla',984349780,'qwerty123','Woody');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -277,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-07 23:02:01
+-- Dump completed on 2019-12-15 16:26:04
