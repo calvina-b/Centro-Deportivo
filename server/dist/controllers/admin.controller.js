@@ -74,7 +74,7 @@ exports.updateFields = (req, res) => __awaiter(void 0, void 0, void 0, function*
 });
 // ··········ARBITROS··········
 exports.getReferees = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const referees = yield database_1.default.query('SELECT R.id_arbitro, R.nombre, R.rut, R.correo, C.deporte, R.nro_contacto, (C.precio_base*0.4) AS cobro_por_servicio FROM Referee AS R JOIN (Cancha AS C) ON (R.deporte = C.deporte) GROUP BY R.id_arbitro');
+    const referees = yield database_1.default.query('SELECT R.id_arbitro, R.nombre, R.rut, R.correo, C.deporte, R.nro_contacto, (C.precio_base*0.4) AS cobro FROM Referee AS R JOIN (SELECT deporte, precio_base FROM Cancha) AS C ON R.deporte = C.deporte GROUP BY R.id_arbitro');
     res.json(referees);
 });
 exports.getOneReferee = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

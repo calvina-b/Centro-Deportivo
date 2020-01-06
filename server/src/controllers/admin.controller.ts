@@ -73,7 +73,7 @@ export const updateFields = async (req:Request, res: Response) => {
 
 // ··········ARBITROS··········
 export const getReferees = async (req:Request, res: Response) => {
-    const referees = await db.query('SELECT R.id_arbitro, R.nombre, R.rut, R.correo, C.deporte, R.nro_contacto, (C.precio_base*0.4) AS cobro_por_servicio FROM Referee AS R JOIN (Cancha AS C) ON (R.deporte = C.deporte) GROUP BY R.id_arbitro');
+    const referees = await db.query('SELECT R.id_arbitro, R.nombre, R.rut, R.correo, C.deporte, R.nro_contacto, (C.precio_base*0.4) AS cobro FROM Referee AS R JOIN (SELECT deporte, precio_base FROM Cancha) AS C ON R.deporte = C.deporte GROUP BY R.id_arbitro');
     res.json(referees);
 };
 

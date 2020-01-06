@@ -26,14 +26,17 @@
     </div>
 
     <div class="container">
+        <div class="text-center" style="width: 50%; position: absolute; margin-left: 10cm;" >
+            <flash-messages></flash-messages>
+        </div>
         <div class="activeReservation" *ngIf="activeReservationInfo == ''">
-            <h1 align="center" style="color: white;">Reservas activas</h1>
+            <h1 align="center" style="color: white;"><u>Reservas activas</u></h1>
             <br>
-            <h1 align="center" style="color: white;">No tienes reservas activas en este momento. <a routerLink="/reservation">Ir a reservar</a></h1>
+            <h3 align="center" style="color: white;">No tienes reservas activas en este momento. <a routerLink="/reservation">Ir a reservar</a></h3>
         </div>
         
         <div class="activeReservation" *ngIf="activeReservationInfo">
-            <h1 align="center" style="color: white;">Reservas activas</h1>
+            <h1 align="center" style="color: white;"><u>Reservas activas</u></h1>
             <br>
             <div class="card" *ngFor="let active of activeReservationInfo; let i = index">
                 <button type="button" class="btn btn-success" (click)="isCollapsed[i] = !isCollapsed[i]">

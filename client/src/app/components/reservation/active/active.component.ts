@@ -53,7 +53,8 @@ export class ActiveComponent implements OnInit {
   deleteActiveReservation() {
     this.reservationService.deleteReservation(this.deleteReservation).subscribe(
       res => {
-        this.router.navigate(['/active']).then(()=>  {window.location.reload();});
+        this.getActiveReservation();
+        this.flashMessage.show('Reserva anulada correctamente', {cssClass: 'alert-danger', timeout: 3000});
       },
       err => console.error(err) 
     )
