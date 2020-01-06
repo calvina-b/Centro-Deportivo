@@ -14,7 +14,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" (click)="d('Cancel click')">Cancelar</button>
-        <button type="button" class="btn btn-danger" ngbAutofocus (click)="deleteItem(id); c('Ok click')">Ok</button>
+        <button type="button" class="btn btn-danger" ngbAutofocus (click)="deleteItem(id, cod); c('Ok click')">Ok</button>
     </div>
 </ng-template>
 
@@ -79,10 +79,10 @@
                                     {{item.estado}}
                                 </td>
                                 <td align="Center">
-                                    <button [routerLink]="['edit', item.cod]" style="color: blue; border: white; background-color: transparent;"><i class="fas fa-pencil-alt"></i></button>
+                                    <button [routerLink]="['edit', item.cod, item.id_cancha]" style="color: blue; border: white; background-color: transparent;"><i class="fas fa-pencil-alt"></i></button>
                                 </td>
                                 <td align="Center">
-                                    <button style="color: red; border: white; background-color: transparent;" (click)="openModal(content, item.cod)"><i class="fas fa-trash-alt"></i></button>
+                                    <button style="color: red; border: white; background-color: transparent;" (click)="openModal(content, item.cod, item.id_cancha)"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>

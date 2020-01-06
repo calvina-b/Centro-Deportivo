@@ -42,7 +42,7 @@ CREATE TABLE `articulo` (
 
 LOCK TABLES `articulo` WRITE;
 /*!40000 ALTER TABLE `articulo` DISABLE KEYS */;
-INSERT INTO `articulo` VALUES (5461234,101,'Fútbol','Balón',2000,25000,'BUEN ESTADO'),(5461234,102,'Fútbol','Balón',2000,25000,'BUEN ESTADO'),(5461235,101,'Fútbol','Set de petos',3500,17000,'BUEN ESTADO'),(5461235,102,'Fútbol','Set de petos',3500,17000,'BUEN ESTADO'),(5461238,201,'BasketBall','Balón',2000,25000,'BUEN ESTADO');
+INSERT INTO `articulo` VALUES (5461234,101,'Fútbol','Balón',2000,25000,'BUEN ESTADO'),(5461234,102,'Fútbol','Balón',2000,25000,'BUEN ESTADO'),(5461234,103,'Fútbol','Balón',2000,25000,'BUEN ESTADO'),(5461235,101,'Fútbol','Set de petos',3500,17000,'BUEN ESTADO'),(5461235,102,'Fútbol','Set de petos',3500,17000,'BUEN ESTADO'),(5461235,103,'Fútbol','Set de petos',3500,17000,'BUEN ESTADO'),(5461238,201,'BasketBall','Balón',2000,25000,'BUEN ESTADO'),(5461238,202,'BasketBall','Balón',2000,25000,'BUEN ESTADO'),(5461236,301,'Tenis','Set de pelotas',2000,14000,'BUEN ESTADO'),(5461236,302,'Tenis','Set de pelotas',2000,14000,'BUEN ESTADO'),(5461236,303,'Tenis','Set de pelotas',2000,14000,'BUEN ESTADO'),(5461237,301,'Tenis','Raquetas',3000,30000,'BUEN ESTADO'),(5461237,302,'Tenis','Raquetas',3000,30000,'BUEN ESTADO'),(5461237,303,'Tenis','Raquetas',3000,30000,'BUEN ESTADO');
 /*!40000 ALTER TABLE `articulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,9 +238,9 @@ CREATE TABLE `usuario` (
   `telefono` int(11) NOT NULL,
   `password` varchar(60) NOT NULL,
   `nombre_usuario` varchar(16) NOT NULL,
-  PRIMARY KEY (`id_usuario`,`rut`),
-  UNIQUE KEY `correo` (`correo`,`nombre_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `correo` (`rut`,`correo`,`nombre_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +249,6 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (11111111,'k','Sujeto de Pruebas','eltiporeservador@hotmail.com','Cliente','Una más estándar que la anterior',123456789,'qwerty123','Reservador'),(13990115,'0','Camilo Alviña','camilo.alvina@alumnos.uv.cl','Cliente','Otra dirección',998549768,'qwerty123','Camilitro'),(15208339,'4','Augusto Pinochet','augusto.pinochet@alumnos.uv.cl','Cliente','Dirección estándar',963711058,'qwerty123','Pinochan'),(19490050,'3','Jorge Hernández','jorge.hernandeze@alumnos.uv.cl','Admin','Pje. Celia Castro #1572, Placilla',984349780,'qwerty123','Woody');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

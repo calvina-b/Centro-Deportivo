@@ -61,20 +61,20 @@ export class AdminService {
     return this.http.get(`${this.API_URI}/admin/items`);
   }
 
-  getItem(id: string){
-    return this.http.get(`${this.API_URI}/admin/items/${id}`);
+  getItem(id: string, cod: string){
+    return this.http.get(`${this.API_URI}/admin/items/${id}/${cod}`);
   }
 
   addItems(item: Model.IItems){
     return this.http.post(`${this.API_URI}/admin/items`, item);
   }
 
-  deleteItems(id: string) {
-    return this.http.delete(`${this.API_URI}/admin/items/${id}`);
+  deleteItems(id: string, cod: string) {
+    return this.http.delete(`${this.API_URI}/admin/items/${id}/${cod}`);
   }
 
-  updateItems(id: string|number, updatedItem: Model.IItems): Observable<Model.IItems> {
-    return this.http.put(`${this.API_URI}/admin/items/${id}`, updatedItem);
+  updateItems(id: string|number, cod: string|number, updatedItem: Model.IItems): Observable<Model.IItems> {
+    return this.http.put(`${this.API_URI}/admin/items/${id}/${cod}`, updatedItem);
   }
 
   // DASHBOARD ARBITROS

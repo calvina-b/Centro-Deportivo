@@ -9,7 +9,8 @@ const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const admin_routes_1 = __importDefault(require("./routes/admin.routes"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
-const reserva_routes_1 = __importDefault(require("./routes/reserva.routes"));
+const reservation_routes_1 = __importDefault(require("./routes/reservation.routes"));
+const other_routes_1 = __importDefault(require("./routes/other.routes"));
 //Inicialization
 const app = express_1.default();
 dotenv_1.default.config();
@@ -25,7 +26,8 @@ app.use(cors_1.default({
 //Routes
 app.use('/api/auth', user_routes_1.default);
 app.use('/api/admin', admin_routes_1.default);
-app.use('/api/reservation', reserva_routes_1.default);
+app.use('/api/reservation', reservation_routes_1.default);
+app.use('/api/fields', other_routes_1.default);
 //Starting the server
 app.listen(app.get('port'), () => {
     console.log('\nServer is running at http://localhost:' +

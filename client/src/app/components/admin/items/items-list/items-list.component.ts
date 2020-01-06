@@ -14,6 +14,7 @@ export class ItemsListComponent implements OnInit {
 
   items: any = [];
   id: any = '';
+  cod: any = '';
 
   constructor(private adminService: AdminService, private flashMessage: FlashMessagesService, private title: Title, private modal: NgbModal) { }
 
@@ -31,8 +32,8 @@ export class ItemsListComponent implements OnInit {
     )
   }
 
-  deleteItem(id: string){
-    this.adminService.deleteItems(id).subscribe(
+  deleteItem(id: string, cod: string){
+    this.adminService.deleteItems(id, cod).subscribe(
       res => {
         this.getItems();
         this.flashMessage.show('Articulo eliminado correctamente', {cssClass: 'alert-danger', timeout: 3000});
@@ -41,8 +42,9 @@ export class ItemsListComponent implements OnInit {
     )
   }
 
-  openModal(content: any, id: string) {
+  openModal(content: any, id: string, cod: string) {
     this.id = id;
+    this.cod = cod;
     this.modal.open(content);
   }
 }

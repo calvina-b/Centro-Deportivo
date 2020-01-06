@@ -37,7 +37,7 @@ export class ItemsFormComponent implements OnInit {
 
     
     if (this.params.id) {
-      this.adminService.getItem(this.params.id).subscribe(
+      this.adminService.getItem(this.params.id, this.params.cod).subscribe(
         res => {
           this.item = res;
         },
@@ -71,7 +71,7 @@ export class ItemsFormComponent implements OnInit {
       return false;
     }
     
-    this.adminService.updateItems(this.params.id, this.item).subscribe(
+    this.adminService.updateItems(this.params.id, this.params.cod, this.item).subscribe(
       res => {
         this.flashMessage.show('Articulo modificado correctamente', {cssClass: 'alert-success', timeout: 2000});
         setTimeout(() => {

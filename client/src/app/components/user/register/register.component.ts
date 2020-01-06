@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private validationService: ValidationService, private flashMessage: FlashMessagesService, private router: Router, private title: Title) { }
 
   ngOnInit() {
-    this.title.setTitle('Register');
+    this.title.setTitle('Registro');
   }
 
   registerUser(){

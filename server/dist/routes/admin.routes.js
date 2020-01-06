@@ -41,7 +41,7 @@ router.route('/referees/:id')
 router.route('/items')
     .get(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.getItems)
     .post(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, verifications.checkIfExistsFieldID, adminController.additems);
-router.route('/items/:id')
+router.route('/items/:id/:cod')
     .get(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.getOneItem)
     .put(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, verifications.checkIfExistsFieldID, adminController.updateItems)
     .delete(verifyToken_1.tokenValidation, verifyToken_1.isAdmin, adminController.deleteItems);

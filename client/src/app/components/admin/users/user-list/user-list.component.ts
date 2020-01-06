@@ -26,6 +26,7 @@ export class UserListComponent implements OnInit {
     this.adminService.getUsers().subscribe(
       res => {
         this.users = res;
+        console.log(this.users)
       },
       err => console.error(err)
     );

@@ -14,7 +14,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" (click)="d('Cancel click')">Volver</button>
-            <button type="button" class="btn btn-success" ngbAutofocus (click)="PostNewReservation(); c('Ok click')">Ok</button>
+            <button type="button" class="btn btn-success" ngbAutofocus (click)="PostNewReservation(); c('Ok click')">Reservar</button>
         </div>
     </ng-template>
 <body class="reservation" *ngIf = "!isShowForm">
@@ -28,25 +28,12 @@
         <div class="columns">
             <div class="Checkcontainer">
                 <h3>Deporte</h3>
-                <br/>
-                <div class="form-check">
-                    <input class="form-check-input" style="vertical-align: middle;" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputFutbol" value="Fútbol" checked>
-                    <label class="form-check-label" for="inputFutbol">
-                    Fútbol
-                    </label>
-                </div>
-                <br/>
-                <div class="form-check">
-                    <input class="form-check-input" style="vertical-align: middle;" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputBasquet" value="basketBall">
-                    <label class="form-check-label" for="inputBasquet">
-                    Basketall
-                    </label>
-                </div>
-                <br/>
-                <div class="form-check">
-                    <input class="form-check-input" style="vertical-align: middle;" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="inputTenis" value="Tenis">
-                    <label class="form-check-label" for="inputTenis">
-                    Tenis
+                <div class="form-check" *ngFor="let sport of sports">
+                    <br/>
+                    <input class="form-check-input" style="vertical-align: middle;" [(ngModel)]="reservationForm.deporte" type="radio" name="deporte" id="{{sport.deporte}}" value="{{sport.deporte}}" checked>
+                    <label class="form-check-label" for="{{sport.deporte}}">
+                    {{sport.deporte}}
+                    <br/>
                     </label>
                 </div>
             </div>   
@@ -58,8 +45,8 @@
     
     <div class="container" *ngIf = "isShowTable">
         <div class="card-body">
-            <div class="table-responsive" style="background-color: rgba(255, 255, 255, 0.897); margin-top: -6.9rem;">
-                <table class="table table-striped" width="100%" cellspacing="0">
+            <div class="table-responsive" style="margin-top: -6.9rem">
+                <table class="table table-striped" width="100%" cellspacing="0" style="background-color: rgba(255, 255, 255, 0.897)">
                     <thead>
                         <tr>
                             <th scope="col">ID cancha</th>
@@ -67,7 +54,7 @@
                             <th scope="col">Fecha</th>
                             <th scope="col">Hora inicio</th>
                             <th scope="col">Hora termino</th>
-                            <th scope="col">Precio base</th>
+                            <th scope="col">Precio</th>
                             <th scope="col" style="text-align: center;">Acciones</th>
                         </tr>
                     </thead>
@@ -92,7 +79,7 @@
                                 ${{reservation.precio}}
                             </td>
                             <td align="Center">
-                                <button type="button" class="btn btn-success" (click)="onSelect(reservation); formDisplay()">Continuar</button>
+                                <button type="button" class="btn btn-success" (click)="onSelect(reservation); formDisplay(); postItemsAndReferee()">Continuar</button>
                             </td>
                         </tr>
                     </tbody>
@@ -130,6 +117,10 @@
                     <input type="text" [(ngModel)]="newReservation.fecha" id="inputFecha" class="form-control" placeholder="Fecha" disabled>
                     <label for="inputFecha">Fecha</label>
                 </div>
+                <div class="form-label-group">
+                    <input type="text" [(ngModel)]="itemAndRefereeName.nombre_art1" id="inputItem1" class="form-control" placeholder="Articulo 1" disabled>
+                    <label for="inputItem1">Articulo 1</label>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="form-label-group">
@@ -141,10 +132,20 @@
                     <label for="inputTermino">Hora termino</label>
                 </div>
                 <div class="form-label-group">
-                    <input type="text" [(ngModel)]="newReservation.valor_arriendo" id="inputTotal" class="form-control" placeholder="Total $" disabled>
-                    <label for="inputTotal">Total</label>
+                    <input type="text" [(ngModel)]="itemAndRefereeName.nombre" id="inputReferee" class="form-control" placeholder="Arbitro" disabled>
+                    <label for="inputReferee">Arbitro</label>
+                </div>
+                <div class="form-label-group">
+                    <input type="text" [(ngModel)]="itemAndRefereeName.nombre_art2" id="inputItem2" class="form-control" placeholder="Articulo 2" disabled>
+                    <label for="inputItem2">Articulo 2</label>
                 </div>
             </div>
+            <div class="col-md-6" style="float:none; margin:auto;">
+                <div class="form-label-group">
+                    <input type="text" [(ngModel)]="newReservation.valor_arriendo" id="inputTotal" class="form-control" placeholder="Total" disabled>
+                    <label for="inputTotal">Total</label>
+                </div>
+            </div>      
         </div>
     </div>
 
@@ -203,6 +204,74 @@
             </div>
         </form>    
     </div>
+
+    <div class="complementsContainer">
+        <h3 align="center">Complementos</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3" style="text-align:center;">Artículos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td>
+                            {{item.nombre_art}}
+                        </td>
+                        <td>
+                           + ${{item.valor}}
+                        </td>     
+                        <td align="Center">
+                            <input type="checkbox" (change)="FieldsChangeItems($event, item.valor, item.cod, item.nombre_art)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive" *ngIf="!referees">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3" style="text-align:center;">Arbitro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;">
+                            No hay arbitro disponible para este horario.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive" *ngIf="referees">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3" style="text-align:center;">Arbitro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let referee of referees">
+                        <td>
+                            {{referee.nombre}}
+                        </td>
+                        <td>
+                           + ${{referee.cobro}}
+                        </td>     
+                        <td align="Center">
+                            <input type="checkbox" (change)="FieldsChangeReferee($event, referee.cobro, referee.id_arbitro, referee.nombre)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
     <div id="outer">
         <div class="inner"><button type="button" class="btn btn-secondary" (click)="reload()">Volver</button></div>
         <div class="inner"><button type="button" class="btn btn-success" (click)="openModal(content)">Reservar</button></div>

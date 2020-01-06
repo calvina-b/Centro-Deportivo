@@ -74,7 +74,7 @@ exports.updateFields = (req, res) => __awaiter(void 0, void 0, void 0, function*
 });
 // ··········ARBITROS··········
 exports.getReferees = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const referees = yield database_1.default.query('SELECT * FROM referee');
+    const referees = yield database_1.default.query('SELECT R.id_arbitro, R.nombre, R.rut, R.correo, C.deporte, R.nro_contacto, (C.precio_base*0.4) AS cobro_por_servicio FROM Referee AS R JOIN (Cancha AS C) ON (R.deporte = C.deporte) GROUP BY R.id_arbitro');
     res.json(referees);
 });
 exports.getOneReferee = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -105,8 +105,9 @@ exports.getItems = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     res.json(items);
 });
 exports.getOneItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    const item = yield database_1.default.query('SELECT * FROM articulo WHERE cod = ?', [id]);
+    const id = req.params.id;
+    const cod = req.params.cod;
+    const item = yield database_1.default.query('SELECT * FROM articulo WHERE cod = ? AND id_cancha = ?', [id, cod]);
     if (item.length > 0) {
         return res.json(item[0]);
     }
@@ -117,13 +118,15 @@ exports.additems = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     res.json({ message: 'Articulo agregado' });
 });
 exports.deleteItems = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    yield database_1.default.query('DELETE FROM articulo WHERE cod = ?', [id]);
+    const id = req.params.id;
+    const cod = req.params.cod;
+    yield database_1.default.query('DELETE FROM articulo WHERE cod = ? AND id_cancha = ?', [id, cod]);
     res.json({ message: 'Articulo eliminado' });
 });
 exports.updateItems = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    yield database_1.default.query('UPDATE articulo SET ? WHERE cod = ?', [req.body, id]);
+    const id = req.params.id;
+    const cod = req.params.cod;
+    yield database_1.default.query('UPDATE articulo SET ? WHERE cod = ? AND id_cancha = ?', [req.body, id, cod]);
     res.json({ message: 'Articulo modificado' });
 });
 // ··········HORARIOS··········

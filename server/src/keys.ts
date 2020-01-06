@@ -4,6 +4,7 @@ export default {
         user: 'root',
         password: 'Scion151515',
         port: 3306,
-        database: 'centrodeportivo_pruebats'
+        // dateStrings: 'date',
+        database: 'centrodeportivov2'
     }
 };

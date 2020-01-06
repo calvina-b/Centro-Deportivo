@@ -13,7 +13,8 @@ body.all {
     overflow: hidden;
     background-size: cover;
     width: 100%;
-    height: 100vh;
+    height: auto;
+    min-height: 85.4vh;
     margin: 0;
     padding: 0;
 }
@@ -23,7 +24,8 @@ body.reservation {
     overflow: hidden;
     background-size: cover;
     width: 100%;
-    height: 126vh;
+    height: auto;
+    min-height: 85.4vh;
     margin: 0;
     padding: 0;
 }
@@ -164,6 +166,7 @@ body.register {
 }
 
 .Checkcontainer {
+    overflow: auto;
     margin-top: -5rem;
     vertical-align: middle;
     text-align: center;
@@ -909,7 +912,21 @@ body.register {
     -webkit-box-shadow: 0px 4px 15px -5px #0046d5;
     box-shadow: 0px 4px 15px -5px #0046d5;
 }
-  
+
+.notfound button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: #0046d5;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 40px;
+    color: #fff;
+    font-weight: 700;
+    -webkit-box-shadow: 0px 4px 15px -5px #0046d5;
+    box-shadow: 0px 4px 15px -5px #0046d5;
+}  
   
 @media only screen and (max-width: 767px) {
     .notfound .notfound-404 {
@@ -946,10 +963,20 @@ ngb-pagination .page-item.active .page-link {
     align-items: center;
     padding: 10px;
     margin-left: 24rem;
-    margin-top: -34rem;
+    margin-top: -43rem;
 }
 
 .teamBContainer {
+    background-color: rgba(255, 255, 255, 0.897);
+    width: 900px;
+    border-radius: 1rem;
+    align-items: center;
+    padding: 10px;
+    margin-left: 24rem;
+    margin-top: 1rem;
+}
+
+.complementsContainer {
     background-color: rgba(255, 255, 255, 0.897);
     width: 900px;
     border-radius: 1rem;
@@ -971,6 +998,7 @@ ngb-pagination .page-item.active .page-link {
 #outer {
     width:100%;
     text-align: center;
+    margin-top: -10rem;
 }
 .inner {
     display: inline-block;
@@ -1002,4 +1030,71 @@ ngb-pagination .page-item.active .page-link {
 
 .ngb-dp-today {
     background-color: #5cb85c;
+}
+
+.lib-panel {
+    margin-bottom: 20Px;
+}
+.lib-panel img {
+    width: 100%;
+    background-color: transparent;
+}
+
+.lib-panel .row,
+.lib-panel .col-md-6 {
+    padding: 0;
+    background-color: #FFFFFF;
+}
+
+
+.lib-panel .lib-row {
+    padding: 0 20px 0 20px;
+}
+
+.lib-panel .lib-row.lib-header {
+    background-color: #FFFFFF;
+    font-size: 20px;
+    padding: 10px 20px 0 20px;
+}
+
+.lib-panel .lib-row.lib-header .lib-header-seperator {
+    height: 2px;
+    width: 26px;
+    background-color: #d9d9d9;
+    margin: 7px 0 7px 0;
+}
+
+.lib-panel .lib-row.lib-desc {
+    position: relative;
+    height: 100%;
+    display: block;
+    font-size: 13px;
+}
+.lib-panel .lib-row.lib-desc a{
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    left: 20px;
+}
+
+.row-margin-bottom {
+    margin-bottom: 20px;
+}
+
+.box-shadow {
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,.10);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.10);
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.activeReservation {
+     width: 900px;
+    border-radius: 1rem;
+    align-items: center;
+    padding: 10px;
+    margin-left: 15rem;
+    margin-top: -20rem;
 }

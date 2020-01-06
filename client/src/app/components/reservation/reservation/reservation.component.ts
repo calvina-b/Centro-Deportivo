@@ -3,7 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
-import {NgbDateStruct, NgbDatepickerI18n, NgbDatepickerConfig, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbDatepickerI18n, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 import * as Model from '../../../models/Models';
 import { ReservationService } from '../../../services/reservation/reservation.service';
@@ -51,6 +51,8 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
 })
 export class ReservationComponent implements OnInit {
 
+  sports: any = [];
+
   model: NgbDateStruct;
 
   reservationForm: Model.IReservation = {
@@ -68,20 +70,36 @@ export class ReservationComponent implements OnInit {
     id_cancha: null,
     deporte_cancha: '',
     id_horario: null,
-  }
+    reserved_referee: null,
+    reserved_item1: null,
+    reserved_item2: null,
+  };
 
   teamA: Model.ITeam = {
     nombre: '',
     nombre_representante: '',
     correo_representante: '',
     telefono: null,
-  }
+  };
 
   teamB: Model.ITeam = {
     nombre: '',
     nombre_representante: '',
     correo_representante: '',
     telefono: null,
+  };
+
+  postitemsAndReferee: Model.IItemsAndReferee = {
+    id_cancha: null,
+  }
+
+  items: any = [];
+  referees: any = [];
+
+  itemAndRefereeName: any = {
+    nombre: 'No',
+    nombre_art1: 'No',
+    nombre_art2: 'No',
   }
 
   page = 1;
@@ -106,8 +124,18 @@ export class ReservationComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.title.setTitle('Reserva');
+    this.title.setTitle('Reservar');
     this.model = this.calendar.getToday();
+    this.getSports();
+  }
+
+  getSports() {
+    this.reservationService.getSports().subscribe(
+      res => {
+        this.sports = res;
+      },
+      err => console.error(err)
+    )
   }
 
   PostReservation() {
@@ -115,7 +143,7 @@ export class ReservationComponent implements OnInit {
       this.reservationForm.fecha = this.minDate.year + '-' + this.minDate.month + '-' + this.minDate.day + ' ';
     }
     this.date = this.reservationForm.fecha;
-    this.reservationService.Reservation(this.reservationForm).subscribe(
+    this.reservationService.reservation(this.reservationForm).subscribe(
       res => {
         this.reservationSched = res;
         this.collectionSize = this.reservationSched.length;
@@ -137,11 +165,16 @@ export class ReservationComponent implements OnInit {
       hora_inicio: selectedItem.hora_inicio,
       hora_termino: selectedItem.hora_termino
     }
+
+    this.postitemsAndReferee = {
+      id_cancha: this.newReservation.id_cancha,
+      id_horario: this.newReservation.id_horario,
+      fecha: this.newReservation.fecha
+    }
   }
 
   get reservations() {
-    return this.reservationSched
-    .map((reservation: any, i: any) => ({id: i + 1, ...reservation}))
+    return this.reservationSched.map((reservation: any, i: any) => ({id: i + 1, ...reservation}))
     .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
@@ -158,7 +191,7 @@ export class ReservationComponent implements OnInit {
   PostNewReservation() {
     this.reservationService.newReservation(this.newReservation, this.teamA, this.teamB).subscribe(
       res => {
-        console.log(res)
+        this.router.navigate(['/active']);
       },
       err => console.error(err)
     )
@@ -207,4 +240,50 @@ export class ReservationComponent implements OnInit {
   selectDate(date: any){
     this.reservationForm.fecha = date.year + '-' + date.month + '-' + date.day + ' ';
   }
+
+  postItemsAndReferee() {
+    this.reservationService.postItemsAndReferee(this.postitemsAndReferee).subscribe(
+      res => {
+        this.items = res.items;
+        this.referees = res.referee;
+      }, err => console.error(err)
+    )
+  }
+
+  FieldsChangeItems(values:any, plus: any, id:any, name:any){
+    if (values.currentTarget.checked == true) {
+      this.newReservation.valor_arriendo = this.newReservation.valor_arriendo + plus;
+      if (this.newReservation.reserved_item1 == null) {
+        this.newReservation.reserved_item1 = id;
+        this.itemAndRefereeName.nombre_art1 = name;
+      } else {
+        this.newReservation.reserved_item2 = id;
+        this.itemAndRefereeName.nombre_art2 = name;
+      }
+    } else {
+      this.newReservation.valor_arriendo = this.newReservation.valor_arriendo - plus;
+      if(this.newReservation.reserved_item1 != null && this.newReservation.reserved_item1 == id){
+        this.newReservation.reserved_item1 = this.newReservation.reserved_item2;
+        this.itemAndRefereeName.nombre_art1 = this.itemAndRefereeName.nombre_art2;
+        this.newReservation.reserved_item2 = null;
+        this.itemAndRefereeName.nombre_art2 = 'No';
+      } else {
+        this.newReservation.reserved_item2 = null;
+        this.itemAndRefereeName.nombre_art2 = 'No';
+      }
+    }
+  }
+
+  FieldsChangeReferee(values:any, plus: any, id:any, name:any) {
+    if(values.currentTarget.checked == true) {
+      this.newReservation.valor_arriendo = this.newReservation.valor_arriendo + plus;
+      this.newReservation.reserved_referee = id;
+      this.itemAndRefereeName.nombre = name;
+    } else {
+      this.newReservation.valor_arriendo = this.newReservation.valor_arriendo - plus;
+      this.newReservation.reserved_referee = null;
+      this.itemAndRefereeName.nombre = 'No';
+    }
+  }
+
 }

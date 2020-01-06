@@ -18,6 +18,7 @@ import { MainComponent } from './components/admin/main/main.component';
 import { AdminService } from './services/admin/admin.service';
 import { AuthService } from './services/user/auth.service';
 import { ValidationService } from './services/validation/validation.service';
+import { OtherService } from './services/other/other.service';
 
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
@@ -34,6 +35,10 @@ import { SchedsListComponent } from './components/admin/scheds/scheds-list/sched
 import { SchedsFormComponent } from './components/admin/scheds/scheds-form/scheds-form.component';
 import { ErrorComponent } from './components/error/error.component';
 import { ReservationComponent } from './components/reservation/reservation/reservation.component';
+import { FieldsComponent } from './components/other/fields/fields.component';
+import { AboutComponent } from './components/other/about/about.component';
+import { ActiveComponent } from './components/reservation/active/active.component';
+import { HistoryComponent } from './components/reservation/history/history.component';
 
 
 @NgModule({
@@ -56,7 +61,11 @@ import { ReservationComponent } from './components/reservation/reservation/reser
     SchedsListComponent,
     SchedsFormComponent,
     ErrorComponent,
-    ReservationComponent
+    ReservationComponent,
+    FieldsComponent,
+    AboutComponent,
+    ActiveComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +81,7 @@ import { ReservationComponent } from './components/reservation/reservation/reser
     AdminService,
     AuthService,
     ValidationService,
+    OtherService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],

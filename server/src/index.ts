@@ -5,7 +5,8 @@ import cors from 'cors';
 
 import adminRoutes from './routes/admin.routes';
 import userRoutes from './routes/user.routes';
-import reservaRoutes from './routes/reserva.routes';
+import reservaRoutes from './routes/reservation.routes';
+import otherRoutes from './routes/other.routes';
 
 //Inicialization
 const app: Application = express();
@@ -27,6 +28,7 @@ app.use(cors({
 app.use('/api/auth', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reservation', reservaRoutes);
+app.use('/api/fields', otherRoutes);
 
 
 //Starting the server

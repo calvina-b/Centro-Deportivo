@@ -32,26 +32,33 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Rut</th>
                                 <th>Correo</th>
                                 <th>Deporte</th>
                                 <th>Telefono</th>
+                                <th>Cobro</th>
                                 <th colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Rut</th>
                                 <th>Correo</th>
                                 <th>Deporte</th>
                                 <th>Telefono</th>
+                                <th>Cobro</th>
                                 <th colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             <tr *ngFor="let referee of referees">
+                                <td>
+                                    {{referee.id_arbitro}}
+                                </td>
                                 <td>
                                     {{referee.nombre}}
                                 </td>
@@ -66,6 +73,9 @@
                                 </td>
                                 <td>
                                     {{referee.nro_contacto}}
+                                </td>
+                                <td>
+                                    ${{referee.cobro_por_servicio}}
                                 </td>
                                 <td align="Center">
                                     <button [routerLink]="['edit', referee.id_arbitro]" style="color: blue; border: white; background-color: transparent;"><i class="fas fa-pencil-alt"></i></button>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -8,10 +9,14 @@ import { Title } from '@angular/platform-browser';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor(private title: Title) { }
+  constructor(private location: Location, private title: Title) { }
 
   ngOnInit() {
     this.title.setTitle('Oops!');
+  }
+
+  backClick() {
+    this.location.back();
   }
 
 }

@@ -61,6 +61,9 @@ export interface INewReservation {
     id_cancha?: number;
     deporte_cancha?: string;
     id_horario?: number;
+    reserved_referee?: number;
+    reserved_item1?: number;
+    reserved_item2?: number;
 }
 
 export interface ITeam {
@@ -68,4 +71,22 @@ export interface ITeam {
     nombre_representante?: string;
     correo_representante?: string;
     telefono?: number;
+}
+
+export interface IItemsAndReferee {
+    id_cancha?: number;
+    id_horario?: number;
+    fecha?: string;
+}
+
+export interface IFieldInfo {
+    deporte?: string;
+}
+
+export interface IActiveReservation {
+    rut_cliente?: number;
+}
+
+export interface IDeleteReservation {
+    num_reserva?: number;
 }

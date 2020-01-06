@@ -1,0 +1,62 @@
+<app-navigation></app-navigation>
+<ng-template #content let-c="close" let-d="dismiss">
+        <div *ngFor="let field of fields">
+            <div class="modal-header">
+                <h4 class="modal-title">{{field.deporte}}<h6>Canchas actuales: {{field.cantidad_canchas}}</h6></h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Precios</strong><br/>Los precios varian según el día y la hora. Fin de semana incluye Viernes, Sabado y Domingo. Horario PM empieza a contar desde 12:00 del mediodía.</p>
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th>Día normal</th>
+                                <th>Día normal pm</th>
+                                <th>Fin de semana</th>
+                                <th>Fin de semana pm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    ${{field.dia_normal}}
+                                </td>
+                                <td>
+                                    ${{field.dia_normal_pm}}
+                                </td>
+                                <td>
+                                    ${{field.dia_concurrido}}
+                                </td>
+                                <td>
+                                    ${{field.dia_concurrido_pm}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" (click)="d('Cancel click')">Cerrar</button>
+            </div> 
+        </div> 
+</ng-template>
+
+<body class="all">
+    <div class="container">
+        <hr>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let sport of sports">
+                <div class="card mb-4">
+                    <img class="card-img-top" src="./../../../../assets/{{sport.deporte}}.jpeg" alt="Card image cap" width="290" height="190">
+                    <div class="card-body">
+                        <h5 class="card-title" style="display: inline-block;">{{sport.deporte}}</h5>
+                        <button class="btn btn-success btn-sm" style="float: right;" (click)="selectField(sport.deporte); postField(); openModal(content)">Detalle</button>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div> 
+</body>

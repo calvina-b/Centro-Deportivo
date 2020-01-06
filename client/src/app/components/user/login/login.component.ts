@@ -22,7 +22,7 @@ user: IUser = {
   constructor(private authService: AuthService, private flashMessage: FlashMessagesService, private title: Title, private router: Router) { }
 
   ngOnInit() {
-    this.title.setTitle('Login');
+    this.title.setTitle('Ingreso');
   }
 
   loginUser(){
