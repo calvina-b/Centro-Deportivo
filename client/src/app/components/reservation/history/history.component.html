@@ -5,4 +5,55 @@
             <img src="../../../../assets/enigroom-icono-reserva.png" alt="">
         </div>   
     </div>
+
+    <div class="container">
+        <div class="activeReservation" *ngIf="historyReservationInfo == ''">
+            <h1 align="center" style="color: white;">Historial de reservas</h1>
+            <br>
+            <h1 align="center" style="color: white;">Aún no has hecho ninguna reserva. <a routerLink="/reservation">Ir a reservar</a></h1>
+        </div>
+        
+        <div class="activeReservation" *ngIf="historyReservationInfo">
+            <h1 align="center" style="color: white;">Historial de reservas</h1>
+            <br>
+            <div class="card" *ngFor="let history of historyReservationInfo; let i = index">
+                <button type="button" class="btn btn-success" (click)="isCollapsed[i] = !isCollapsed[i]">
+                    <strong>Número de reserva:</strong> {{history.num_reserva}}&nbsp;&nbsp; <strong>Deporte:</strong> {{history.deporte_cancha}}&nbsp;&nbsp; <strong>Cancha:</strong> {{history.id_cancha}}&nbsp;&nbsp; <strong>Fecha:</strong> {{history.fecha}}&nbsp;&nbsp; <strong>Horario:</strong> {{history.hora_inicio}}-{{history.hora_termino}}&nbsp;&nbsp;
+                </button>
+                <div [ngbCollapse]="!isCollapsed[i]" style="background-color: rgba(255, 255, 255, 0.897);">
+                    <h3 align="center">Complementos</h3>
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-label-group" *ngIf="!history.nombre_arbitro">
+                                <input type="text" id="inputReferee" value="No" class="form-control" placeholder="Arbitro" disabled>
+                                <label for="inputReferee">Arbitro</label>
+                            </div>
+                            <div class="form-label-group" *ngIf="history.nombre_arbitro">
+                                <input type="text" id="inputReferee" [(ngModel)]="history.nombre_arbitro" class="form-control" placeholder="Arbitro" disabled>
+                                <label for="inputReferee">Arbitro</label>
+                            </div>
+                            <div class="form-label-group" *ngIf="!history.item1">
+                                <input type="text" id="inputItem1" value="No" class="form-control" placeholder="Articulo 1" disabled>
+                                <label for="inputItem1">Articulo 1</label>
+                            </div>
+                            <div class="form-label-group" *ngIf="history.item1">
+                                <input type="text" id="inputItem1" [(ngModel)]="history.item1" class="form-control" placeholder="Articulo 1" disabled>
+                                <label for="inputItem1">Articulo 1</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-label-group" *ngIf="!history.item2">
+                                <input type="text" id="inputItem2" value="No" class="form-control" placeholder="Articulo 2" disabled>
+                                <label for="inputItem2">Articulo 2</label>
+                            </div>
+                            <div class="form-label-group" *ngIf="history.item2">
+                                <input type="text" id="inputItem2" [(ngModel)]="history.item2" class="form-control" placeholder="Articulo 2" disabled>
+                                <label for="inputItem2">Articulo 2</label>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
 </body>

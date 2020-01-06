@@ -19,7 +19,9 @@ router.route('/new')
 router.route('/itemsAndReferee')
     .post(verifyToken_1.tokenValidation, reservationController.reservationItemsAndReferee);
 router.route('/active')
-    .post(reservationController.getActiveReservation);
+    .post(verifyToken_1.tokenValidation, reservationController.getActiveReservation);
 router.route('/active/delete')
-    .post(reservationController.deleteReservation);
+    .post(verifyToken_1.tokenValidation, reservationController.deleteReservation);
+router.route('/history')
+    .post(verifyToken_1.tokenValidation, reservationController.getHistoryReservation);
 exports.default = router;

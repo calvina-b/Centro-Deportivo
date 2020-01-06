@@ -37,4 +37,7 @@ export class ReservationService {
     return this.http.post(`${this.API_URI}/reservation/active/delete`, id);
   }
 
+  historyReservation(id: Model.IActiveReservation){
+    return this.http.post(`${this.API_URI}/reservation/history`, id);
+  }
 }

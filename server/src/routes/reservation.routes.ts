@@ -16,9 +16,12 @@ router.route('/itemsAndReferee')
     .post(tokenValidation, reservationController.reservationItemsAndReferee)
 
 router.route('/active')
-    .post(reservationController.getActiveReservation)
+    .post(tokenValidation, reservationController.getActiveReservation)
     
 router.route('/active/delete')
-    .post(reservationController.deleteReservation) 
+    .post(tokenValidation, reservationController.deleteReservation)
+    
+router.route('/history')
+    .post(tokenValidation, reservationController.getHistoryReservation)
     
 export default router;

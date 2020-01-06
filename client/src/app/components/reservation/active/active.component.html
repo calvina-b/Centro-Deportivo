@@ -29,7 +29,7 @@
         <div class="activeReservation" *ngIf="activeReservationInfo == ''">
             <h1 align="center" style="color: white;">Reservas activas</h1>
             <br>
-            <h1 align="center" style="color: white;">No tienes reservas activas en este momento</h1>
+            <h1 align="center" style="color: white;">No tienes reservas activas en este momento. <a routerLink="/reservation">Ir a reservar</a></h1>
         </div>
         
         <div class="activeReservation" *ngIf="activeReservationInfo">
@@ -40,11 +40,42 @@
                     <strong>Número de reserva:</strong> {{active.num_reserva}}&nbsp;&nbsp; <strong>Deporte:</strong> {{active.deporte_cancha}}&nbsp;&nbsp; <strong>Cancha:</strong> {{active.id_cancha}}&nbsp;&nbsp; <strong>Fecha:</strong> {{active.fecha}}&nbsp;&nbsp; <strong>Horario:</strong> {{active.hora_inicio}}-{{active.hora_termino}}&nbsp;&nbsp;
                 </button>
                 <div [ngbCollapse]="!isCollapsed[i]" style="background-color: rgba(255, 255, 255, 0.897);">
-                <p>{{active.num_reserva}}</p>
-                <button type="button" class="btn btn-danger" style="float: right;" (click)="openModal(content, active.num_reserva)">Anular reserva</button>
+                    <h3 align="center">Complementos</h3>
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-label-group" *ngIf="!active.nombre_arbitro">
+                                <input type="text" id="inputReferee" value="No" class="form-control" placeholder="Arbitro" disabled>
+                                <label for="inputReferee">Arbitro</label>
+                            </div>
+                            <div class="form-label-group" *ngIf="active.nombre_arbitro">
+                                <input type="text" id="inputReferee" [(ngModel)]="active.nombre_arbitro" class="form-control" placeholder="Arbitro" disabled>
+                                <label for="inputReferee">Arbitro</label>
+                            </div>
+                            <div class="form-label-group" *ngIf="!active.item1">
+                                <input type="text" id="inputItem1" value="No" class="form-control" placeholder="Articulo 1" disabled>
+                                <label for="inputItem1">Articulo 1</label>
+                            </div>
+                            <div class="form-label-group" *ngIf="active.item1">
+                                <input type="text" id="inputItem1" [(ngModel)]="active.item1" class="form-control" placeholder="Articulo 1" disabled>
+                                <label for="inputItem1">Articulo 1</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-label-group" *ngIf="!active.item2">
+                                <input type="text" id="inputItem2" value="No" class="form-control" placeholder="Articulo 2" disabled>
+                                <label for="inputItem2">Articulo 2</label>
+                            </div>
+                            <div class="form-label-group" *ngIf="active.item2">
+                                <input type="text" id="inputItem2" [(ngModel)]="active.item2" class="form-control" placeholder="Articulo 2" disabled>
+                                <label for="inputItem2">Articulo 2</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" align="center">
+                            <button type="button" class="btn btn-danger" (click)="openModal(content, active.num_reserva)">Anular reserva</button>
+                        </div>
+                    </div>    
                 </div>
             </div>
         </div>
     </div>
-    
 </body>

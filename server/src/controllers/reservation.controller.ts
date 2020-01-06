@@ -94,7 +94,7 @@ export const getActiveReservation = async (req: Request, res: Response) => {
     const date = new Date();
     const currentHour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     const currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " ";
-    const active = await db.query('SELECT R.num_reserva, R.fecha, R.id_cancha, R.deporte_cancha, H.hora_inicio, H.hora_termino, S.nombre AS nombre_arbitro, A.nombre_art AS item1, B.nombre_art AS item2 FROM Reserva AS R LEFT JOIN Horarios AS H ON R.id_horario = H.id_horario LEFT JOIN Referee AS S ON R.reserved_referee = S.id_arbitro LEFT JOIN Articulo AS A ON R.reserved_item1 = A.cod AND R.id_cancha = A.id_cancha LEFT JOIN Articulo AS B ON R.reserved_item2 = B.cod AND R.id_cancha = B.id_cancha WHERE rut_cliente = ? AND (CASE WHEN fecha = ? THEN fecha >= ? AND hora_termino > ? ELSE fecha > ? END)', [rut_cliente, currentDate, currentDate, currentHour, currentDate]);
+    const active = await db.query('SELECT R.num_reserva, R.fecha, R.id_cancha, R.deporte_cancha, H.hora_inicio, H.hora_termino, S.nombre AS nombre_arbitro, A.nombre_art AS item1, B.nombre_art AS item2 FROM Reserva AS R LEFT JOIN Horarios AS H ON R.id_horario = H.id_horario LEFT JOIN Referee AS S ON R.reserved_referee = S.id_arbitro LEFT JOIN Articulo AS A ON R.reserved_item1 = A.cod AND R.id_cancha = A.id_cancha LEFT JOIN Articulo AS B ON R.reserved_item2 = B.cod AND R.id_cancha = B.id_cancha WHERE rut_cliente = ? AND (CASE WHEN fecha = ? THEN fecha >= ? AND hora_termino > ? ELSE fecha > ? END) ORDER BY fecha, hora_inicio', [rut_cliente, currentDate, currentDate, currentHour, currentDate]);
     
     res.json(active)
 }
@@ -105,4 +105,11 @@ export const deleteReservation = async (req: Request, res: Response) => {
     await db.query('DELETE FROM Equipo WHERE num_reserva = ?', [num_reserva]);
 
     res.json({message: 'Reserva anulada correctamente.'})
+}
+
+export const getHistoryReservation = async (req: Request, res: Response) => {
+    const { rut_cliente } = req.body;
+    const history = await db.query('SELECT R.num_reserva, R.fecha, R.id_cancha, R.deporte_cancha, H.hora_inicio, H.hora_termino, S.nombre AS nombre_arbitro, A.nombre_art AS item1, B.nombre_art AS item2 FROM Reserva AS R LEFT JOIN Horarios AS H ON R.id_horario = H.id_horario LEFT JOIN Referee AS S ON R.reserved_referee = S.id_arbitro LEFT JOIN Articulo AS A ON R.reserved_item1 = A.cod AND R.id_cancha = A.id_cancha LEFT JOIN Articulo AS B ON R.reserved_item2 = B.cod AND R.id_cancha = B.id_cancha WHERE rut_cliente = ? ORDER BY fecha, hora_inicio', [rut_cliente]);
+    
+    res.json(history)
 }
