@@ -51,5 +51,9 @@ router.route('/scheds/:id')
     .get(tokenValidation, isAdmin, adminController.getOneSched)
     .put(tokenValidation, isAdmin, adminController.updateScheds)
     .delete(tokenValidation, isAdmin, adminController.deleteScheds) 
-    
+
+// Reservas
+router.route('/reservation')
+    .get(tokenValidation, isAdmin, adminController.getReservation)
+    .post(tokenValidation, isAdmin, adminController.deleteReservation)
 export default router;

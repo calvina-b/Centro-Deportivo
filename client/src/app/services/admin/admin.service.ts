@@ -15,12 +15,12 @@ export class AdminService {
 
   // DASHBOARD HOME
   getAdmin() {
-    return this.http.get(`${this.API_URI}/admin`);
+    return this.http.get<any>(`${this.API_URI}/admin`);
   }
 
   // DASHBOARD USUARIOS
   getUsers() {
-    return this.http.get(`${this.API_URI}/admin/users`);
+    return this.http.get<any>(`${this.API_URI}/admin/users`);
   }
 
   getUser(id: string){
@@ -79,7 +79,7 @@ export class AdminService {
 
   // DASHBOARD ARBITROS
   getReferees(){
-    return this.http.get(`${this.API_URI}/admin/referees`);
+    return this.http.get<any>(`${this.API_URI}/admin/referees`);
   }
 
   getReferee(id: string){
@@ -117,5 +117,14 @@ export class AdminService {
 
   updateScheds(id: string|number, updatedSched: Model.IScheds): Observable<Model.IScheds> {
     return this.http.put(`${this.API_URI}/admin/scheds/${id}`, updatedSched);
+  }
+
+  // DASHBOARD RESERVAS
+  getReservations(){
+    return this.http.get<any>(`${this.API_URI}/admin/reservation`);
+  }
+
+  deleteReservation(id: Model.IDeleteReservation) {
+    return this.http.post(`${this.API_URI}/admin/reservation`, id);
   }
 }

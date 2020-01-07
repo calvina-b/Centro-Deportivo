@@ -43,20 +43,8 @@
                                 <th scope="col" colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th scope="col">Codigo</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">ID cancha</th>
-                                <th scope="col">Deporte cancha</th>
-                                <th scope="col">Valor arriedo</th>
-                                <th scope="col">Precio costo</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col" colspan="2" style="text-align:center;">Acciones</th>
-                            </tr>
-                        </tfoot>
                         <tbody>
-                            <tr *ngFor="let item of items">
+                            <tr *ngFor="let item of itemsPag">
                                 <th>
                                     {{item.cod}}
                                 </th>
@@ -87,6 +75,10 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-end p-2">
+                        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                        </ngb-pagination>
+                    </div> 
                 </div>
             </div>
         </div>

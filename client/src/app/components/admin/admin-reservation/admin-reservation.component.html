@@ -1,0 +1,159 @@
+<app-admin></app-admin>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Anular Reserva</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p><strong>¿Estás seguro que quieres continuar?</strong></p>
+        <p>La reserva será eliminada permanentemente.
+        <span class="text-danger">Está operacion no se puede deshacer.</span>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="d('Cancel click')">Cancelar</button>
+        <button type="button" class="btn btn-danger" ngbAutofocus (click)="deleteAdminReservation(); c('Ok click')">Ok</button>
+    </div>
+</ng-template>
+
+<div class="page-wrapper chiller-theme toggled">
+    <main class="page-content">
+        <div>
+            <div class="card-header bg-dark text-white">
+                <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
+                    <flash-messages></flash-messages>
+                </div>
+                <i class="fas fa-book-open"></i> Reservas
+                <a routerLink="/reservation" class="btn btn-outline-light" style="margin-top: -6px; float: right;">Nueva reserva</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Número de reserva</th>
+                                <th scope="col">Deporte</th>
+                                <th scope="col">Cancha</th>
+                                <th scope="col">fecha</th>
+                                <th scope="col">Horario</th>
+                                <th scope="col">Arbitro</th>
+                                <th scope="col">Art. 1</th>
+                                <th scope="col">Art. 2</th>
+                                <th scope="col" style="text-align:center;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let reservation of reservationPag">
+                                <th>
+                                   {{reservation.num_reserva}}    
+                                </th>
+                                <td>
+                                    {{reservation.deporte_cancha}} 
+                                </td>
+                                <td>
+                                    {{reservation.id_cancha}}     
+                                </td>
+                                <td>
+                                    {{reservation.fecha}}     
+                                </td>
+                                <td>
+                                    {{reservation.hora_inicio}}-{{reservation.hora_termino}}     
+                                </td>
+                                <td *ngIf="!reservation.nombre_arbitro">
+                                    No     
+                                </td>
+                                <td *ngIf="reservation.nombre_arbitro">
+                                    {{reservation.nombre_arbitro}}     
+                                </td>
+                                <td *ngIf="!reservation.item1">
+                                    No     
+                                </td>
+                                <td *ngIf="reservation.item1">
+                                    {{reservation.item1}}     
+                                </td>
+                                <td *ngIf="!reservation.item2">
+                                    No     
+                                </td>
+                                <td *ngIf="reservation.item2">
+                                    {{reservation.item2}}     
+                                </td>
+                                <td align="Center">
+                                    <button style="color: red; border: white; background-color: transparent;" (click)="openModal(content, reservation.num_reserva)"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end p-2">
+                        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                        </ngb-pagination>
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="card-header bg-dark text-white">
+                <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
+                    <flash-messages></flash-messages>
+                </div>
+                <i class="fas fa-book-open"></i> Equipos por reserva
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Número de reserva</th>
+                                <th scope="col">Deporte</th>
+                                <th scope="col">Cancha</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Horario</th>
+                                <th scope="col">Equipo</th>
+                                <th scope="col">Representante</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Correo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let team of teamsPag">
+                                <th>
+                                   {{team.num_reserva}}    
+                                </th>
+                                <td>
+                                    {{team.deporte_cancha}} 
+                                </td>
+                                <td>
+                                    {{team.id_cancha}}     
+                                </td>
+                                <td>
+                                    {{team.fecha}}     
+                                </td>
+                                <td>
+                                    {{team.hora_inicio}}-{{team.hora_termino}}     
+                                </td>
+                                <td>
+                                    {{team.nombre}}     
+                                </td>
+                                <td>
+                                    {{team.nombre_representante}}     
+                                </td>
+                                <td>
+                                    {{team.telefono}}     
+                                </td>
+                                <td>
+                                    {{team.correo_representante}}     
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end p-2">
+                        <ngb-pagination [collectionSize]="collectionSizeT" [(page)]="pageT" [pageSize]="pageSizeT">
+                        </ngb-pagination>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </main>  
+</div>

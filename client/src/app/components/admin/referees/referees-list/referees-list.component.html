@@ -42,20 +42,8 @@
                                 <th colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Rut</th>
-                                <th>Correo</th>
-                                <th>Deporte</th>
-                                <th>Telefono</th>
-                                <th>Cobro</th>
-                                <th colspan="2" style="text-align:center;">Acciones</th>
-                            </tr>
-                        </tfoot>
                         <tbody>
-                            <tr *ngFor="let referee of referees">
+                            <tr *ngFor="let referee of refereesPag">
                                 <td>
                                     {{referee.id_arbitro}}
                                 </td>
@@ -75,7 +63,7 @@
                                     {{referee.nro_contacto}}
                                 </td>
                                 <td>
-                                    ${{referee.cobro_por_servicio}}
+                                    ${{referee.cobro}}
                                 </td>
                                 <td align="Center">
                                     <button [routerLink]="['edit', referee.id_arbitro]" style="color: blue; border: white; background-color: transparent;"><i class="fas fa-pencil-alt"></i></button>
@@ -86,6 +74,49 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-end p-2">
+                        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                        </ngb-pagination>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="card-header bg-dark text-white">
+                <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
+                    <flash-messages></flash-messages>
+                </div>
+                <i class="fas fa-address-card"></i> Cantidad de reservas por arbitro
+                <a routerLink="/admin/referees/add" class="btn btn-outline-light" style="margin-top: -6px; float: right;">Añadir nuevo</a></div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Deporte</th>
+                                <th>Cantidad de reservas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let refereeReservation of refereeReservationPag">
+                                <td>
+                                    {{refereeReservation.nombre}}
+                                </td>
+                                <td>
+                                    {{refereeReservation.deporte}}
+                                </td>
+                                <td align="center">
+                                    {{refereeReservation.cantidad_reservas}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end p-2">
+                        <ngb-pagination [collectionSize]="collectionSizeR" [(page)]="pageR" [pageSize]="pageSizeR">
+                        </ngb-pagination>
+                    </div> 
                 </div>
             </div>
         </div>

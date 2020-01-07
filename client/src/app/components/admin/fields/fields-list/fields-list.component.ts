@@ -15,6 +15,10 @@ export class FieldsListComponent implements OnInit {
   fields: any = [];
   id: any = '';
 
+  page = 1;
+  pageSize = 5;
+  collectionSize = 0;
+
   constructor(private adminService: AdminService, private flashMessage: FlashMessagesService, private title: Title, private modal: NgbModal) { }
 
   ngOnInit() {
@@ -26,6 +30,7 @@ export class FieldsListComponent implements OnInit {
     this.adminService.getFields().subscribe(
       res => {
         this.fields = res;
+        this.collectionSize = this.fields.length;
       },
       err => console.error(err)
     );
@@ -44,5 +49,10 @@ export class FieldsListComponent implements OnInit {
   openModal(content: any, id: string) {
     this.id = id;
     this.modal.open(content);
+  }
+
+  get fieldsPag() {
+    return this.fields.map((field: any, i: any) => ({id: i + 1, ...field}))
+    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 }

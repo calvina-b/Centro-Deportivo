@@ -15,6 +15,10 @@ export class SchedsListComponent implements OnInit {
   scheds: any = [];
   id: any = '';
 
+  page = 1;
+  pageSize = 5;
+  collectionSize = 0;
+
   constructor(private adminService: AdminService, private flashMessage: FlashMessagesService, private title: Title, private modal: NgbModal) { }
 
   ngOnInit() {
@@ -26,6 +30,7 @@ export class SchedsListComponent implements OnInit {
     this.adminService.getScheds().subscribe(
       res => {
         this.scheds = res;
+        this.collectionSize = this.scheds.length;
       },
       err => console.error(err)
     )
@@ -44,5 +49,10 @@ export class SchedsListComponent implements OnInit {
   openModal(content: any, id: string) {
     this.id = id;
     this.modal.open(content);
+  }
+
+  get schedsPag() {
+    return this.scheds.map((sched: any, i: any) => ({id: i + 1, ...sched}))
+    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 }

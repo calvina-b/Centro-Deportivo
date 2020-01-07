@@ -20,6 +20,7 @@ import { RefereesListComponent } from './components/admin/referees/referees-list
 import { RefereesFormComponent } from './components/admin/referees/referees-form/referees-form.component';
 import { SchedsListComponent } from './components/admin/scheds/scheds-list/scheds-list.component';
 import { SchedsFormComponent } from './components/admin/scheds/scheds-form/scheds-form.component';
+import { AdminReservationComponent } from './components/admin/admin-reservation/admin-reservation.component';
 import { ErrorComponent } from './components/error/error.component';
 
 import * as Guards from './_helpers/Guards';
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'admin/scheds', component: SchedsListComponent, canActivate: [Guards.AdminGuard] },
   { path: 'admin/scheds/add', component: SchedsFormComponent, canActivate: [Guards.AdminGuard] },
   { path: 'admin/scheds/edit/:id', component: SchedsFormComponent, canActivate: [Guards.AdminGuard] },
+  { path: 'admin/reservation', component: AdminReservationComponent, canActivate: [Guards.AdminGuard] },
   { path: '**', component: ErrorComponent }
 ];
 

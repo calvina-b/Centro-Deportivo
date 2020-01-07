@@ -19,7 +19,7 @@
 </ng-template>
 
 <div class="page-wrapper chiller-theme toggled">
-    <main class="page-content">
+    <main class="page-content">        
         <div>
             <div class="card-header bg-dark text-white">
                 <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
@@ -42,20 +42,8 @@
                                 <th scope="col" colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Nombre Usuario</th>
-                                <th scope="col">Rut</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Direccion</th>
-                                <th scope="col">Tipo Cuenta</th>
-                                <th scope="col" colspan="2" style="text-align:center;">Acciones</th>
-                            </tr>
-                        </tfoot>
                         <tbody>
-                            <tr *ngFor="let user of users">
+                            <tr *ngFor="let user of usersPag">
                                 <td>
                                     {{user.nombre}}
                                 </td>
@@ -86,8 +74,110 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-end p-2">
+                        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                        </ngb-pagination>
+                    </div> 
                 </div>
             </div>
-        </div>         
+
+            <div>
+                <div class="card-header bg-dark text-white">
+                    <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
+                        <flash-messages></flash-messages>
+                    </div>
+                    <i class="fas fa-users"></i> Usuarios con cantidad de reservas mayor al promedio.
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Nombre Usuario</th>
+                                    <th scope="col">Rut</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Cantidad de reservas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let userReservation of usersReservationsPag">
+                                    <td>
+                                        {{userReservation.nombre}}
+                                    </td>
+                                    <td>
+                                        {{userReservation.nombre_usuario}}
+                                    </td>
+                                    <td>
+                                        {{userReservation.rut_cliente}}-{{userReservation.dV}}
+                                    </td>
+                                    <td>
+                                        {{userReservation.correo}}
+                                    </td>
+                                    <td align="center">
+                                        {{userReservation.cantidad_reservas}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end p-2">
+                            <ngb-pagination [collectionSize]="collectionSizeU" [(page)]="pageU" [pageSize]="pageSizeU">
+                            </ngb-pagination>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="card-header bg-dark text-white">
+                    <div class="text-center" style="width: 50%; position: absolute; margin-left: 3cm;" >
+                        <flash-messages></flash-messages>
+                    </div>
+                    <i class="fas fa-users"></i> Usuarios que han realizado reservas en más de un deporte.
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Nombre Usuario</th>
+                                    <th scope="col">Rut</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Cantidad de deportes</th>
+                                    <th scope="col">Cantidad total de reservas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let userReservationSport of usersReservationSportPag">
+                                    <td>
+                                        {{userReservationSport.nombre}}
+                                    </td>
+                                    <td>
+                                        {{userReservationSport.nombre_usuario}}
+                                    </td>
+                                    <td>
+                                        {{userReservationSport.rut_cliente}}-{{userReservationSport.dV}}
+                                    </td>
+                                    <td>
+                                        {{userReservationSport.correo}}
+                                    </td>
+                                    <td align="center">
+                                        {{userReservationSport.cantidad_deportes}}
+                                    </td>
+                                    <td align="center">
+                                        {{userReservationSport.cantidad_reservas}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end p-2">
+                            <ngb-pagination [collectionSize]="collectionSizeS" [(page)]="pageS" [pageSize]="pageSizeS">
+                            </ngb-pagination>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>    
 </div>

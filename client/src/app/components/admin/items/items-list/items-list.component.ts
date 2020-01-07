@@ -16,6 +16,10 @@ export class ItemsListComponent implements OnInit {
   id: any = '';
   cod: any = '';
 
+  page = 1;
+  pageSize = 5;
+  collectionSize = 0;
+
   constructor(private adminService: AdminService, private flashMessage: FlashMessagesService, private title: Title, private modal: NgbModal) { }
 
   ngOnInit() {
@@ -27,6 +31,7 @@ export class ItemsListComponent implements OnInit {
     this.adminService.getItems().subscribe(
       res => {
         this.items = res;
+        this.collectionSize = this.items.length;
       },
       err => console.error(err)
     )
@@ -46,5 +51,10 @@ export class ItemsListComponent implements OnInit {
     this.id = id;
     this.cod = cod;
     this.modal.open(content);
+  }
+
+  get itemsPag() {
+    return this.items.map((item: any, i: any) => ({id: i + 1, ...item}))
+    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 }

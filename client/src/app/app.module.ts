@@ -39,6 +39,7 @@ import { FieldsComponent } from './components/other/fields/fields.component';
 import { AboutComponent } from './components/other/about/about.component';
 import { ActiveComponent } from './components/reservation/active/active.component';
 import { HistoryComponent } from './components/reservation/history/history.component';
+import { AdminReservationComponent } from './components/admin/admin-reservation/admin-reservation.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { HistoryComponent } from './components/reservation/history/history.compo
     FieldsComponent,
     AboutComponent,
     ActiveComponent,
-    HistoryComponent
+    HistoryComponent,
+    AdminReservationComponent
   ],
   imports: [
     BrowserModule,

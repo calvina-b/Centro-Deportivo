@@ -39,16 +39,8 @@
                                 <th scope="col" colspan="2" style="text-align:center;">Acciones</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Deporte</th>
-                                <th scope="col">Precio base</th>
-                                <th scope="col" colspan="2" style="text-align:center;">Acciones</th>
-                            </tr>
-                        </tfoot>
                         <tbody>
-                            <tr *ngFor="let field of fields">
+                            <tr *ngFor="let field of fieldsPag">
                                 <th>
                                     {{field.id}}    
                                 </th>
@@ -67,6 +59,10 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-end p-2">
+                        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                        </ngb-pagination>
+                    </div> 
                 </div>
             </div>
         </div>
